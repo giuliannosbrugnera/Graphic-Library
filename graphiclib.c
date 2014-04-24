@@ -443,3 +443,9 @@ void hsvTorgb(HSV hsv, RGB *rgb) {
 		}
 	}
 }
+
+void create(Object *obj) {
+	obj->points->next = NULL;
+	obj->edges->next = NULL;
+}
+

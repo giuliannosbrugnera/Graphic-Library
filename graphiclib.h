@@ -16,15 +16,28 @@ typedef struct Point{
 
 /*Color data structure*/
 
-typedef struct RGB
-{
+typedef struct RGB {
 	float r, g, b;
 }RGB;
 
-typedef struct HSV
-{
+typedef struct HSV {
 	float h, s, v;
 }HSV;
+
+typedef struct pointList {
+	point pt;
+	struct pointList *next;
+}PointList;
+
+typedef struct edgeList {
+	int pt1, pt2;
+	struct edgeList *next;
+}EdgeList;
+
+typedef struct object {
+	PointList points;
+	EdgeList edges;
+}Object;
 
 /*Functions prototypes*/
 
@@ -49,5 +62,9 @@ void drawWindowLine(point *viewPortXY, char *input);
 
 void rgbTohsv(RGB rgb, HSV *hsv);
 void hsvTorgb(HSV hsv, RGB *rgb);
+
+void create(Object *obj);
+int vazia(LISTA_LIGADA *lista);
+int inserir(LISTA_LIGADA *lista, ITEM *item);
 
 #endif /* __graphiclib_h__ */
