@@ -162,20 +162,12 @@ void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 	
 	//calculating the deltas
 	dx = abs(ptTwoD->x - ptOneD->x);
-	dy = abs(ptTwoD->y - ptTwoD->y);
-
-	//in case delta y is negative
-	if(dy < 0){
-		s = -1;
-		dy = -dy;
-	} else{
-		s = 1;
-	}
+	dy = abs(ptTwoD->y - ptOneD->y);
 
 	x = ptOneD->x;
 	y = ptOneD->y;
 
-	m = (float)((ptTwoD->y - ptOneD->y) / (ptTwoD->x - ptOneD->x));
+	m = (float)(dy / dx);
 	e = (float)(m - 0.5);
 
 	for(i = 0; i < dx; i++){
@@ -445,7 +437,7 @@ void hsvTorgb(HSV hsv, RGB *rgb) {
 }
 
 void create(Object *obj) {
-	obj->points->next = NULL;
-	obj->edges->next = NULL;
+	obj->points.next = NULL;
+	obj->edges.next = NULL;
 }
 

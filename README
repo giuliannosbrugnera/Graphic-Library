@@ -4,4 +4,4 @@ Biblioteca gráfica incrementada ao longo do semestre.
 Instruções para compilação
 $ make				# compila os arquivos
 $ ./program			# executa o programa
-$ make uninstall	# remove arquivos temporário e o executável
+$ make uninstall    # remove arquivos temporários e o executável

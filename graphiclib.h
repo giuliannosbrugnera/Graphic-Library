@@ -64,7 +64,7 @@ void rgbTohsv(RGB rgb, HSV *hsv);
 void hsvTorgb(HSV hsv, RGB *rgb);
 
 void create(Object *obj);
-int vazia(LISTA_LIGADA *lista);
-int inserir(LISTA_LIGADA *lista, ITEM *item);
+// int vazia(LISTA_LIGADA *lista);
+// int inserir(LISTA_LIGADA *lista, ITEM *item);
 
 #endif /* __graphiclib_h__ */
