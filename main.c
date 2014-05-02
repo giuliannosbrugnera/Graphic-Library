@@ -37,6 +37,7 @@ int main(){
 	initMatrix(image, &viewPortXY);
 
 	//draws a line by the first method seen
+	//drawLine(image, &ptOneD, &ptTwoD, &viewPortXY);
 	drawLine(image, &ptOneD, &ptTwoD, &viewPortXY);
 
 	//reinitializing the matrix

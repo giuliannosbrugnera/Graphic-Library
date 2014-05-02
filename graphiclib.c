@@ -6,11 +6,11 @@
 
 /*--------------------------------------------------------------------------------------------*/
 void setValues(point *minXY, point *maxXY, point *ptOne, point *ptTwo){
-	printf("\nDefina os valores minimos:\n\nCoordenada X: ");
+	printf("\nDefina os valores minimos do universo:\n\nCoordenada X: ");
 	scanf("%f", &minXY->x);
 	printf("Coordenada Y: ");
 	scanf("%f", &minXY->y);
-	printf("\nDefina os valores maximos:\n\nCoordenada X: ");
+	printf("\nDefina os valores maximos do universo:\n\nCoordenada X: ");
 	scanf("%f", &maxXY->x);
 	printf("Coordenada Y: ");
 	scanf("%f", &maxXY->y);
@@ -141,10 +141,26 @@ void drawLine(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 }
 
 void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
-	int s; //slope
-	int i, j, x, y, dx, dy;
-	float m, e;
+	int i, j, ystep, steep;
+	float x0, x1, y0, y1, aux;
+
+	x0 = ptOneD->x;
+	y0 = ptOneD->y;
+	x1 = ptTwoD->x;
+	y1 = ptTwoD->y;
+
 	
+	if(abs(y1 - y0) > abs(x1 - x0)){
+		steep = 1;
+		aux = x0; x0 = y0; y0 = aux; 
+		aux = x1; x1 =  y1; y1 = aux;
+	}
+
+	if(x0 > x1){
+		aux = x0; x0 = x1; x1 = aux;
+		aux = y0; y0 = y1; y1 = aux;
+	}
+
 	char image[(int)viewPortXY->x][(int)viewPortXY->y];
 
 	//decoding the vector of chars to a matrix to simplify the understanding of attributions
@@ -154,32 +170,35 @@ void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 		}
 	}
 
-	//in case where we need to invert x1 > x2
-	if(ptOneD->x > ptTwoD->x){
-		bresenham(input, ptTwoD, ptOneD, viewPortXY);
-		return;
+	int deltax = x1 - x0;
+	int deltay = abs(y1 - y0);
+	int error = deltax/2;
+	int y = y0, x;
+
+	if(y0 < y1){
+		ystep = 1;
+	} else {
+		ystep = -1;
 	}
-	
-	//calculating the deltas
-	dx = abs(ptTwoD->x - ptOneD->x);
-	dy = abs(ptTwoD->y - ptOneD->y);
 
-	x = ptOneD->x;
-	y = ptOneD->y;
-
-	m = (float)(dy / dx);
-	e = (float)(m - 0.5);
-
-	for(i = 0; i < dx; i++){
-
-		image[x][y] = '1';
-
-		while(e > 0){
-			y++;
-			e--;
+	for(x = x0; x < x1; x++){
+		if(steep){
+			image[y][x] = '1';
+		} else {
+			image[x][y] = '1';
 		}
-		x++;
-		e = e + m;
+		error = error - deltay;
+		if(error < 0){
+			y = y + ystep;
+			error = error + deltax;
+		}
+	}
+
+	//copying back the matrix to the vector of char
+	for(i = 0; i < viewPortXY->x; i++){
+		for(j = 0; j < viewPortXY->y; j++){
+			input[(i * (int)viewPortXY->y) + j] = image[i][j];
+		}
 	}
 
 	//prints the result on screen
@@ -190,13 +209,7 @@ void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 		}
 		printf("\n");
 	}
-
-	//copying back the matrix to the vector of char
-	for(i = 0; i < viewPortXY->x; i++){
-		for(j = 0; j < viewPortXY->y; j++){
-			input[(i * (int)viewPortXY->y) + j] = image[i][j];
-		}
-	}	
+	
 }
 
 /*--------------------------------------------------------------------------------------------*/
