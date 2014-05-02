@@ -24,6 +24,8 @@ typedef struct HSV {
 	float h, s, v;
 }HSV;
 
+/*Objects data structure*/
+
 /*typedef struct pointList {
 	point pt;
 	struct pointList *next;
