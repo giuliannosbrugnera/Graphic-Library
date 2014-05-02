@@ -348,6 +348,7 @@ void drawWindowLine(point *viewPortXY, char *input){
 	    }
 }
 
+/*--------------------------------------------------------------------------------------------*/
 void rgbTohsv(RGB rgb, HSV *hsv) {
 	float max, min;
 
@@ -436,8 +437,8 @@ void hsvTorgb(HSV hsv, RGB *rgb) {
 	}
 }
 
-void create(Object *obj) {
+/*void create(Object *obj) {
 	obj->points.next = NULL;
 	obj->edges.next = NULL;
-}
+}*/
 

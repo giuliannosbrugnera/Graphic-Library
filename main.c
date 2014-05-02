@@ -48,7 +48,7 @@ int main(){
 	//creates a windows using X library according to the coordinates given by the user
 	//drawWindow(&viewPortXY);
 
-	//creates a windows and draws the Bresenham line
+	//creates a window and draws the Bresenham line
 	drawWindowLine(&viewPortXY, image);
 
 	return 0;
