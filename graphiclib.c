@@ -5,7 +5,7 @@
 /*Functions*/
 
 /*--------------------------------------------------------------------------------------------*/
-void setValues(point *minXY, point *maxXY, point *ptOne, point *ptTwo){
+void setUniverse(point *minXY, point *maxXY){
 	printf("\nDefina os valores minimos do universo:\n\nCoordenada X: ");
 	scanf("%f", &minXY->x);
 	printf("Coordenada Y: ");
@@ -14,6 +14,15 @@ void setValues(point *minXY, point *maxXY, point *ptOne, point *ptTwo){
 	scanf("%f", &maxXY->x);
 	printf("Coordenada Y: ");
 	scanf("%f", &maxXY->y);
+}
+
+void getUniverse(point *minXY, point *maxXY){
+	printf("Coordendas minimas do universo: [%.4f, %.4f]\n", minXY->x, minXY->y);
+	printf("Coordendas maximas do universo: [%.4f, %.4f]\n\n", maxXY->x, maxXY->y);
+}
+
+/*--------------------------------------------------------------------------------------------*/
+void setValues(point *ptOne, point *ptTwo){
 	printf("\nDefina o primeiro ponto:\n\nCoordenada X: ");
 	scanf("%f", &ptOne->x);
 	printf("Coordenada Y: ");
@@ -24,9 +33,7 @@ void setValues(point *minXY, point *maxXY, point *ptOne, point *ptTwo){
 	scanf("%f", &ptTwo->y);
 }
 
-void getValues(point *minXY, point *maxXY, point *ptOne, point *ptTwo){
-	printf("\nCoordenadas minimas: [%.4f, %.4f]\n", minXY->x, minXY->y);
-	printf("Coordenadas maximas: [%.4f, %.4f]\n", maxXY->x, maxXY->y);
+void getValues(point *ptOne, point *ptTwo){
 	printf("Coordendas do primeiro ponto: [%.4f, %.4f]\n", ptOne->x, ptOne->y);
 	printf("Coordendas do segundo ponto: [%.4f, %.4f]\n\n", ptTwo->x, ptTwo->y);
 }
@@ -141,8 +148,8 @@ void drawLine(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 }
 
 void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
-	int i, j, ystep, steep;
-	float x0, x1, y0, y1, aux;
+	int i = 0, j = 0, ystep = 0, steep = 0;
+	float x0 = 0, x1 = 0, y0 = 0, y1 = 0, aux = 0;
 
 	x0 = ptOneD->x;
 	y0 = ptOneD->y;
@@ -209,7 +216,7 @@ void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 		}
 		printf("\n");
 	}
-	
+
 }
 
 /*--------------------------------------------------------------------------------------------*/

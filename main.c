@@ -4,11 +4,17 @@ int main(){
 
 	point  minXY, maxXY, viewPortXY, ptOne, ptTwo, ptOneN, ptTwoN, ptOneD, ptTwoD;
 
-	//setting initial values
-	setValues(&minXY, &maxXY, &ptOne, &ptTwo);
+	//setting universe values
+	setUniverse(&minXY, &maxXY);
 
-	//getting initial values
-	getValues(&minXY, &maxXY, &ptOne, &ptTwo);
+	//getting universe values
+	getUniverse(&minXY, &maxXY);
+
+	//setting points values
+	setValues(&ptOne, &ptTwo);
+
+	//getting points values
+	getValues(&ptOne, &ptTwo);
 
 	//setting the view port size according to user input
 	setViewPort(&viewPortXY);
@@ -42,6 +48,15 @@ int main(){
 
 	//reinitializing the matrix
 	initMatrix(image, &viewPortXY);
+
+	//draws a line by the bresenham method
+	bresenham(image, &ptOneD, &ptTwoD, &viewPortXY);
+
+	//setting points values
+	setValues(&ptOne, &ptTwo);
+
+	//getting points values
+	getValues(&ptOne, &ptTwo);
 
 	//draws a line by the bresenham method
 	bresenham(image, &ptOneD, &ptTwoD, &viewPortXY);

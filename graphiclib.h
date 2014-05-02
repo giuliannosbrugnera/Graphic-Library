@@ -43,8 +43,11 @@ typedef struct object {
 
 /*Functions prototypes*/
 
-void setValues(point *minXY, point *maxXY, point *ptOne, point *ptTwo);
-void getValues(point *minXY, point *maxXY, point *ptOne, point *ptTwo);
+void setUniverse(point *minXY, point *maxXY);
+void getUniverse(point *minXY, point *maxXY);
+
+void setValues(point *ptOne, point *ptTwo);
+void getValues(point *ptOne, point *ptTwo);
 
 void setViewPort(point *viewPortXY);
 void getViewPort(point *viewPortXY);
