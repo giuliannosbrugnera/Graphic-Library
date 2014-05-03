@@ -26,25 +26,28 @@ typedef struct HSV {
 
 /*Objects data structure*/
 
-/*typedef struct pointList {
-	point pt;
-	struct pointList *next;
-}PointList;
+typedef struct Node{
+	point ptList; //coordinates of the point
+	point ptListN;
+	point ptListD;
+	struct Node *next;
+}node;
 
-typedef struct edgeList {
-	int pt1, pt2;
-	struct edgeList *next;
-}EdgeList;
-
-typedef struct object {
-	PointList points;
-	EdgeList edges;
-}Object;*/
+typedef node *list;
 
 /*Functions prototypes*/
 
-void setValues(point *minXY, point *maxXY, point *ptOne, point *ptTwo);
-void getValues(point *minXY, point *maxXY, point *ptOne, point *ptTwo);
+int startList(list *p_l);
+int emptyList(list *p_l);
+void addEndList(list *p_l, point *pt, point *maxXY, point *minXY, point *viewPortXY);
+void freeList(list *p_l);
+void showList(list *p_l);
+
+void setUniverse(point *minXY, point *maxXY);
+void getUniverse(point *minXY, point *maxXY);
+
+void setValues(point *ptOne, point *ptTwo);
+void getValues(point *ptOne, point *ptTwo);
 
 void setViewPort(point *viewPortXY);
 void getViewPort(point *viewPortXY);
@@ -65,8 +68,5 @@ void drawWindowLine(point *viewPortXY, char *input);
 void rgbTohsv(RGB rgb, HSV *hsv);
 void hsvTorgb(HSV hsv, RGB *rgb);
 
-/*void create(Object *obj);
-int vazia(LISTA_LIGADA *lista);
-int inserir(LISTA_LIGADA *lista, ITEM *item);*/
 
 #endif /* __graphiclib_h__ */
