@@ -5,6 +5,74 @@
 /*Functions*/
 
 /*--------------------------------------------------------------------------------------------*/
+int startList(list *p_l){
+	*p_l = NULL;
+}
+
+int emptyList(list *p_l){
+	if(*p_l == NULL) return 1;
+	return 0;
+}
+
+void addEndList(list *p_l, point *pt, point *maxXY, point *minXY, point *viewPortXY){
+	point auxPointN;
+	node *newNode, *auxNode;
+	newNode = (node*) malloc (sizeof(node));
+	
+	newNode->ptList.x = pt->x;
+	newNode->ptList.y = pt->y;
+	newNode->next = NULL;
+
+	//converts the newNode to srn
+	newNode->ptListN = sruToSrn(pt, maxXY, minXY);
+	auxPointN = sruToSrn(pt, maxXY, minXY);
+
+	//convertes the newNode to srd
+	newNode->ptListD = srnToSrd(&auxPointN, viewPortXY);
+
+	//prints the normalized and discrete point to check the values
+	printf("\nnormalizado: [%.4f %.4f]", newNode->ptListN.x, newNode->ptListN.y);
+	printf("\ndiscreto: [%.4f %.4f]\n", newNode->ptListD.x, newNode->ptListD.y);
+
+	//puts the newNode in the end of the list
+	if(emptyList(p_l)){
+		*p_l = newNode;
+	} else {
+		auxNode = *p_l;
+		while(auxNode->next != NULL){
+			auxNode = auxNode->next;
+		}
+		auxNode->next = newNode;
+	}
+}
+
+void freeList(list *p_l){
+	if(!emptyList(p_l)){
+		node *auxNode;
+
+		do{
+			auxNode = (*p_l)->next;
+			free(*p_l);
+			*p_l = auxNode;
+		} while(auxNode != NULL);
+
+		startList(p_l);
+	}
+}
+
+void showList(list *p_l){
+	node *auxNode;
+	auxNode = *p_l;
+
+	while(auxNode != NULL){
+		printf("[%.2f %.2f] ", auxNode->ptList.x, auxNode->ptList.y);
+		auxNode = auxNode->next;
+	}
+
+	printf("\n");
+}
+
+/*--------------------------------------------------------------------------------------------*/
 void setUniverse(point *minXY, point *maxXY){
 	printf("\nDefina os valores minimos do universo:\n\nCoordenada X: ");
 	scanf("%f", &minXY->x);
@@ -456,9 +524,3 @@ void hsvTorgb(HSV hsv, RGB *rgb) {
 		}
 	}
 }
-
-/*void create(Object *obj) {
-	obj->points.next = NULL;
-	obj->edges.next = NULL;
-}*/
-
