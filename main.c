@@ -46,15 +46,31 @@ int main(){
 
 	}
 
-	printf("Valores presentes na lista:\n");
+	/*printf("Valores presentes na lista:\n");
 	showList(&l);
 	printf("\n");
 
-	//break to freeze the program
-	getchar(); getchar();
+
+	point testOne, testTwo, testThree;
+	testOne = l->ptListD;
+	testTwo = l->next->ptListD;
+	testThree = l->next->next->ptListD;
+
+	printf("\nValor do ponto D1 no main: %f %f", testOne.x, testOne.y);
+	printf("\nValor do ponto D2 no main: %f %f", testTwo.x, testTwo.y);
+	printf("\nValor do ponto D3 no main: %f %f", testThree.x, testThree.y);
+
+	//test to print a bresenham line
+	bresenham(image, &testOne, &testTwo, &viewPortXY);
+	bresenham(image, &testTwo, &testThree, &viewPortXY);
+	drawWindowLine(&viewPortXY, image);*/
+
+	printListBresenham(&l, image, &viewPortXY);
+	drawWindowLine(&viewPortXY, image);
+
 //===================================================================================================
 
-	//ESTA PARTE ABAIXO DO TRACEJADO ERA COMO FAZIAMOS ANTES, ACIMA ESTA A TENTATIVA DE TRABALHAR COM LISTAS
+	/*ESTA PARTE ABAIXO DO TRACEJADO ERA COMO FAZIAMOS ANTES, ACIMA ESTA A TENTATIVA DE TRABALHAR COM LISTAS
 
 	//setting universe values
 	setUniverse(&minXY, &maxXY);
@@ -104,7 +120,7 @@ int main(){
 	//drawWindow(&viewPortXY);
 
 	//creates a window and draws the Bresenham line
-	drawWindowLine(&viewPortXY, image);
+	drawWindowLine(&viewPortXY, image);*/
 
 	return 0;
 }
