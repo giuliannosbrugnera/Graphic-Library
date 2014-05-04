@@ -42,6 +42,7 @@ int emptyList(list *p_l);
 void addEndList(list *p_l, point *pt, point *maxXY, point *minXY, point *viewPortXY);
 void freeList(list *p_l);
 void showList(list *p_l);
+void printListBresenham(list *p_l, char *input, point *viewPortXY);
 
 void setUniverse(point *minXY, point *maxXY);
 void getUniverse(point *minXY, point *maxXY);

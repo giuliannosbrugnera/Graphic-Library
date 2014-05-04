@@ -30,9 +30,9 @@ void addEndList(list *p_l, point *pt, point *maxXY, point *minXY, point *viewPor
 	//convertes the newNode to srd
 	newNode->ptListD = srnToSrd(&auxPointN, viewPortXY);
 
-	//prints the normalized and discrete point to check the values
+	/*//prints the normalized and discrete point to check the values
 	printf("\nnormalizado: [%.4f %.4f]", newNode->ptListN.x, newNode->ptListN.y);
-	printf("\ndiscreto: [%.4f %.4f]\n", newNode->ptListD.x, newNode->ptListD.y);
+	printf("\ndiscreto: [%.4f %.4f]\n", newNode->ptListD.x, newNode->ptListD.y);*/
 
 	//puts the newNode in the end of the list
 	if(emptyList(p_l)){
@@ -65,11 +65,28 @@ void showList(list *p_l){
 	auxNode = *p_l;
 
 	while(auxNode != NULL){
-		printf("[%.2f %.2f] ", auxNode->ptList.x, auxNode->ptList.y);
+		/*printf("\nCoordenadas dos pontos: [%.2f %.2f] ", auxNode->ptList.x, auxNode->ptList.y);
+		printf("\nPontos normalizados: [%.2f %.2f] ", auxNode->ptListN.x, auxNode->ptListN.y);
+		printf("\nPontos discretos: [%.2f %.2f] ", auxNode->ptListD.x, auxNode->ptListD.y);*/
 		auxNode = auxNode->next;
 	}
 
 	printf("\n");
+}
+
+void printListBresenham(list *p_l, char *input, point *viewPortXY){
+	node *auxNode;
+	auxNode = *p_l;
+	point ptOneD, ptTwoD;
+
+	while(auxNode != NULL){
+		ptOneD = auxNode->ptListD;
+		if(auxNode->next != NULL){
+			ptTwoD = auxNode->next->ptListD;
+			bresenham(input, &ptOneD, &ptTwoD, viewPortXY);
+		}
+		auxNode = auxNode->next;
+	}
 }
 
 /*--------------------------------------------------------------------------------------------*/
