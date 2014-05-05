@@ -1,7 +1,7 @@
 #include "graphiclib.h"
 
 int main(){
-	int i;
+	int i, j;
 	point  minXY, maxXY, viewPortXY, ptOne, ptTwo, ptOneN, ptTwoN, ptOneD, ptTwoD;
 
 	//setting universe values
@@ -22,28 +22,37 @@ int main(){
 	//initializes the matrix
 	initMatrix(image, &viewPortXY);
 
-	list l; //list that will contain the points of the object
-	int q; //stores the quantity of points selected by the user
+	int qPoint, qObject; //stores the quantity of points and objects selected by the user
+
+	printf("Quantos objetos a imagem ira possuir: ");
+	scanf("%d", &qObject);
+
+	list l[qObject]; //list that will contain the array of objects with its points
 	point pt; //point entered by the user that is added to the list
 
-	printf("Quantos pontos o objeto ira possuir: ");
-	scanf("%d", &q);
+	for(j = 0; j < qObject; j++){
+		printf("Quantos pontos o objeto %d ira possuir: ", j+1);
+		scanf("%d", &qPoint);
 
-	//starting the list
-	startList(&l);
+		//starting the list
+		startList(&l[j]);
 
-	//fullfils the list with the points provided by the user
-	for(i = 0; i < q; i++){
-		
-		printf("Ponto %d\nCoordenada X: ", i+1);
-		scanf("%f", &pt.x);
-		printf("Coordenada Y: ");
-		scanf("%f", &pt.y);
-		printf("\n");
+		//fullfils the list with the points provided by the user
+		for(i = 0; i < qPoint; i++){
+			
+			printf("Ponto %d\nCoordenada X: ", i+1);
+			scanf("%f", &pt.x);
+			printf("Coordenada Y: ");
+			scanf("%f", &pt.y);
+			printf("\n");
 
-		//adds this point to the list
-		addEndList(&l, &pt, &maxXY, &minXY, &viewPortXY);
+			//adds this point to the list
+			addEndList(&l[j], &pt, &maxXY, &minXY, &viewPortXY);
 
+		}
+
+		//calls the function of the list responsible for printing the lines using Bresenham's algorithm
+		printListBresenham(&l[j], image, &viewPortXY);
 	}
 
 	/*printf("Valores presentes na lista:\n");
@@ -65,7 +74,7 @@ int main(){
 	bresenham(image, &testTwo, &testThree, &viewPortXY);
 	drawWindowLine(&viewPortXY, image);*/
 
-	printListBresenham(&l, image, &viewPortXY);
+	//sends the discrete matrix to x, for printing it graphically
 	drawWindowLine(&viewPortXY, image);
 
 //===================================================================================================

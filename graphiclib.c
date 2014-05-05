@@ -294,13 +294,13 @@ void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 	}
 
 	//prints the result on screen
-	printf("\nLinha pelo algoritmo de Bresenham:\n\n");
+	/*printf("\nLinha pelo algoritmo de Bresenham:\n\n");
 	for(i = 0; i < viewPortXY->x; i++){
 		for(j = 0; j < viewPortXY->y; j++){
 			printf("%c", image[i][j]);
 		}
 		printf("\n");
-	}
+	}*/
 
 }
 
