@@ -28,8 +28,8 @@ typedef struct HSV {
 
 typedef struct Node{
 	point ptList; //coordinates of the point
-	point ptListN;
-	point ptListD;
+	point ptListN; //point normalized
+	point ptListD; //point discrete
 	struct Node *next;
 }node;
 
