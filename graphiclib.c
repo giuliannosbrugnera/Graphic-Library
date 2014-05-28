@@ -1,3 +1,8 @@
+/*Daniel Ramos Miola 438340
+  Giulianno Raphael Sbrugnera 408093
+  Igor Felipe Ferreira Ceridório 408611
+  Rafael Paschoal Giordano 408298*/
+
 #include "graphiclib.h"
 
 #define EventMask (KeyPressMask | ExposureMask)
@@ -559,7 +564,7 @@ void drawWindowLine(point *viewPortXY, char *input){
 	  if (!(window=XCreateSimpleWindow(display,RootWindow(display,screen),0,0,width,height,1,BlackPixel(display,screen),WhitePixel(display,screen)))) ret = 0;
 	  else {
 	    XSelectInput(display, window, EventMask);
-	    XStoreName(display, window, "Reta pelo metodo de Bresenham");
+	    XStoreName(display, window, "Resultado");
 	    gc = XCreateGC(display, window, 0, &values);
 	  
 	    XMapWindow(display,window);

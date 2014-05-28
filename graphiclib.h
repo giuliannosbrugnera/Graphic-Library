@@ -1,3 +1,8 @@
+/*Daniel Ramos Miola 438340
+  Giulianno Raphael Sbrugnera 408093
+  Igor Felipe Ferreira Ceridório 408611
+  Rafael Paschoal Giordano 408298*/
+
 /* graphiclib.h */
 
 #ifndef __graphiclib_h__
