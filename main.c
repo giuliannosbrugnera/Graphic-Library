@@ -52,6 +52,7 @@ int main(){
 		}
 
 		//calls the function of the list responsible for printing the lines using Bresenham's algorithm
+		//scale(&l[j]);
 		printListBresenham(&l[j], image, &viewPortXY);
 	}
 

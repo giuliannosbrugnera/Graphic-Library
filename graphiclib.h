@@ -27,7 +27,7 @@ typedef struct HSV {
 /*Objects data structure*/
 
 typedef struct Node{
-	point ptList; //coordinates of the point
+	point ptList;  //coordinates of the point
 	point ptListN; //point normalized
 	point ptListD; //point discrete
 	struct Node *next;
@@ -36,6 +36,7 @@ typedef struct Node{
 typedef node *list;
 
 /*Functions prototypes*/
+void multMatrix(float matrizA[][3], int matrizB[][1], int* matrizC);
 
 int startList(list *p_l);
 int emptyList(list *p_l);
@@ -62,6 +63,10 @@ void getSrd(point *ptOneD, point *ptTwoD);
 
 void drawLine(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY);
 void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY);
+void translate(list *p_l);
+void rotate(list *p_l);
+void scale(list *p_l);
+void mirror(list *p_l);
 
 void drawWindow(point *viewPortXY);
 void drawWindowLine(point *viewPortXY, char *input);
