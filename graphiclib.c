@@ -5,6 +5,25 @@
 /*Functions*/
 
 /*--------------------------------------------------------------------------------------------*/
+void multMatrix(float matrizA[][3], int matrizB[][1], int* matrizC){
+
+	int i, j, x, Aux = 0;
+
+	//multiplica matrizes
+	for(i=0; i<3; i++) {
+		for(j=0; j<1; j++){
+			matrizC[i]=0;
+		    for(x=0; x<3; x++){
+		    	Aux = Aux + (int)(matrizA[i][x]*matrizB[x][j]);
+		    }
+		    matrizC[i]=Aux;
+		    Aux=0;
+		}
+		printf("%d\n", matrizC[i]);
+	}
+
+}
+
 int startList(list *p_l){
 	*p_l = NULL;
 }
@@ -302,6 +321,137 @@ void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 		printf("\n");
 	}*/
 
+}
+
+/*----Operaçoes em objetos--------------------------------------------------------------------*/
+void translate(list *p_l) {
+	node *auxNode;
+	auxNode = *p_l;
+	float  t[3][3];
+	int pi[3][1], p[3], dx, dy;
+
+	printf("Entre com o deslocamento em X e Y respectivamente: ");
+	scanf("%d", &dx);
+	scanf("%d", &dy);
+
+	t[0][0]= 1;	t[0][1]= 0;	t[0][2]= dx;
+	t[1][0]= 0;	t[1][1]= 1;	t[1][2]= dy;
+	t[2][0]= 0;	t[2][1]= 0;	t[2][2]= 1;
+
+	while(auxNode != NULL){
+		pi[0][0] = (int)auxNode->ptListD.x;
+		pi[1][0] = (int)auxNode->ptListD.y;
+		pi[2][0] = 1;
+
+		p[0] = 0;
+		p[1] = 0;
+		p[2] = 0;
+
+		multMatrix(t, pi, &p);
+
+		auxNode->ptListD.x = (int)p[0];
+		auxNode->ptListD.y = (int)p[1];
+
+		auxNode = auxNode->next;
+	}
+}
+
+void rotate(list *p_l) {
+	node *auxNode;
+	auxNode = *p_l;
+	float t[3][3];
+	int pi[3][1], p[3], teta;
+
+	printf("Entre com o angulo de rotacao: ");
+	scanf("%d", &teta);
+
+	printf("%d\n", (int)cos(teta) );
+
+	t[0][0]= (float)cos(teta);	t[0][1]= (float)-sin(teta); t[0][2]= 0;
+	t[1][0]= (float)sin(teta);	t[1][1]= (float)cos(teta);  t[1][2]= 0;
+	t[2][0]= 0;					t[2][1]= 0;			 	 	t[2][2]= 1;
+
+
+
+	while(auxNode != NULL){
+		pi[0][0] = (int)auxNode->ptListD.x;
+		pi[1][0] = (int)auxNode->ptListD.y;
+		pi[2][0] = 1;
+
+		p[0] = 0;
+		p[1] = 0;
+		p[2] = 0;
+
+		multMatrix(t, pi, &p);
+
+		auxNode->ptListD.x = (int)p[0];
+		auxNode->ptListD.y = (int)p[1];
+
+		auxNode = auxNode->next;
+	}
+}
+
+void scale(list *p_l) {
+	node *auxNode;
+	auxNode = *p_l;
+	float t[3][3], escx, escy;
+	int pi[3][1], p[3];
+
+	printf("Entre com a escala em x e y respectivamente: ");
+	scanf("%f %f", &escx, &escy);
+
+	t[0][0]= escx;	t[0][1]= 0; 	t[0][2]= 0;
+	t[1][0]= 0;		t[1][1]= escy;  t[1][2]= 0;
+	t[2][0]= 0;		t[2][1]= 0;		t[2][2]= 1;
+
+
+
+	while(auxNode != NULL){
+		pi[0][0] = (int)auxNode->ptListD.x;
+		pi[1][0] = (int)auxNode->ptListD.y;
+		pi[2][0] = 1;
+
+		p[0] = 0;
+		p[1] = 0;
+		p[2] = 0;
+
+		multMatrix(t, pi, &p);
+
+		auxNode->ptListD.x = (int)p[0];
+		auxNode->ptListD.y = (int)p[1];
+
+		auxNode = auxNode->next;
+	}
+}
+
+void mirror(list *p_l) {
+	node *auxNode;
+	auxNode = *p_l;
+	float t[3][3], escx, escy;
+	int pi[3][1], p[3];
+
+	t[0][0]= 1;		t[0][1]= 0; 	t[0][2]= 0;
+	t[1][0]= 0;		t[1][1]= -1;    t[1][2]= 0;
+	t[2][0]= 0;		t[2][1]= 0;		t[2][2]= 1;
+
+
+
+	while(auxNode != NULL){
+		pi[0][0] = (int)auxNode->ptListD.x;
+		pi[1][0] = (int)auxNode->ptListD.y;
+		pi[2][0] = 1;
+
+		p[0] = 0;
+		p[1] = 0;
+		p[2] = 0;
+
+		multMatrix(t, pi, &p);
+
+		auxNode->ptListD.x = (int)p[0];
+		auxNode->ptListD.y = (int)p[1];
+
+		auxNode = auxNode->next;
+	}
 }
 
 /*--------------------------------------------------------------------------------------------*/
