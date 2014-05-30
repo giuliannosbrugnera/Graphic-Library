@@ -12,7 +12,7 @@
 /*--------------------------------------------------------------------------------------------*/
 void multMatrix(float matrizA[][3], int matrizB[][1], int* matrizC){
 
-	int i, j, x, Aux = 0;
+	int i, j, x, Aux = 0; //oi
 
 	//multiplica matrizes
 	for(i=0; i<3; i++) {
