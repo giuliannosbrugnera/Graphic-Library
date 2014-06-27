@@ -32,8 +32,8 @@ $ make uninstall    # remove arquivos temporários e o executável
 
 ##### B) Para o caso 3D
 
-- [ ] 1) uma estrutura para um ponto tridimensional;
-- [ ] 2) uma estrutura para uma face do objeto tridimensional;
+- [x] 1) uma estrutura para um ponto tridimensional;
+- [x] 2) uma estrutura para uma face do objeto tridimensional;
 - [ ] 3) uma estrutura para um objeto tridimensional;
 - [ ] 4) uma função que dado dois vetores realize o produto vetorial entre eles;
 - [ ] 5) uma função auxiliar para normalizar vetores;
@@ -43,3 +43,10 @@ $ make uninstall    # remove arquivos temporários e o executável
 - [ ] 9) uma função que implementa uma curva de Bèzier ou uma função que implementa uma B-Spline (escolha uma!);
 - [ ] 10) funções que realizam o deslocamento, rotação, escalonamento, cisalhamento e espelhamento na forma de operadores lineares considerando coordenadas homegêneas no espaço tridimensional;
 - [ ] 11) uma função para o algoritmo "z-buffer";
+
+##### TO-DO
+
+- [ ] Realizar verificações em geral de tamanhos de janelas;
+- [ ] Estudar e implementar a mudança de base do SRN para o SRD (3D)
+- [ ] Função que multiplica uma matriz por um vetor (Retirar os Warnings) 
+- [ ] Função que multiplica duas matrizes (Retirar os Warnings)
