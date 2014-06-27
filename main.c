@@ -6,14 +6,17 @@
 #include "graphiclib.h"
 
 int main(){
-	int i, j;
-	point  minXY, maxXY, viewPortXY;
+	int i, j, option;
+	point  minXYZ, maxXYZ, viewPortXY;
+
+	printf("Quais as dimensoes do seu(s) objeto(s)?\n-[0] para 2D;\n-[1] para 3D.\n-> ");
+	scanf("%d", &option);
 
 	//setting universe values
-	setUniverse(&minXY, &maxXY);
+	setUniverse(&minXYZ, &maxXYZ, option);
 
 	//getting universe values
-	getUniverse(&minXY, &maxXY);
+	getUniverse(&minXYZ, &maxXYZ, option);
 
 	//setting the view port size according to user input
 	setViewPort(&viewPortXY);
@@ -53,7 +56,7 @@ int main(){
 			printf("\n");
 
 			//adds this point to the list
-			addEndList(&l[j], &pt, &maxXY, &minXY, &viewPortXY);
+			addEndList(&l[j], &pt, &maxXYZ, &minXYZ, &viewPortXY, option);
 
 		}
 
