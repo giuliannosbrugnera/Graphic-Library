@@ -25,4 +25,4 @@ clean:
 	rm -f *.o
 
 uninstall:
-	rm -f *.exe *~
+	rm -f program *~
