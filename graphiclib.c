@@ -10,7 +10,7 @@
 /*Functions*/
 
 /*--------------------------------------------------------------------------------------------*/
-void multMatrix(float matrizA[][3], int matrizB[][1], int* matrizC){
+/*void multMatrix(float matrizA[][3], int matrizB[][1], int* matrizC){
 
 	int i, j, x, Aux = 0; //oi
 
@@ -27,7 +27,7 @@ void multMatrix(float matrizA[][3], int matrizB[][1], int* matrizC){
 		printf("%d\n", matrizC[i]);
 	}
 
-}
+}*/
 
 int startList(list *p_l){
 	*p_l = NULL;
@@ -329,7 +329,7 @@ void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 }
 
 /*----Operaçoes em objetos--------------------------------------------------------------------*/
-void translate(list *p_l) {
+/*void translate(list *p_l) {
 	node *auxNode;
 	auxNode = *p_l;
 	float  t[3][3];
@@ -457,7 +457,7 @@ void mirror(list *p_l) {
 
 		auxNode = auxNode->next;
 	}
-}
+}*/
 
 /*--------------------------------------------------------------------------------------------*/
 void drawWindow(point *viewPortXY){
