@@ -29,6 +29,11 @@ $ make uninstall    # remove arquivos temporários e o executável
 - [ ] 13) funcões que realizam o deslocamento, rotação, escalonamento, cisalhamento e espelhamento na forma de operadores lineares considerando coordenadas homegêneas;
 - [x] 14) funções para a conversão entre os sistemas de cores RGB e HSV e vice-versa;
 - [x] 15) uma função para mapear o SRD no monitor para visualização (deve-se passar o SRD, matriz, e a "look up table");
+- [ ] 16) uma função que implementa a multiplicação de uma matriz por um vetor (já considerando coordenadas homogêneas, isto é, matrizes de tamanho 3 x 3 no caso bidimendional);
+- [ ] 17) uma função que implementa a multiplicação de duas matrizes 3 x 3.
+
+Obs: as funções do item 13 podem todas ser simplificadas com o uso da função do item 16, bastando passar a matriz correta
+para a função.
 
 ##### B) Para o caso 3D
 
@@ -36,13 +41,21 @@ $ make uninstall    # remove arquivos temporários e o executável
 - [x] 2) uma estrutura para uma face do objeto tridimensional;
 - [ ] 3) uma estrutura para um objeto tridimensional;
 - [ ] 4) uma função que dado dois vetores realize o produto vetorial entre eles;
-- [ ] 5) uma função auxiliar para normalizar vetores;
+- [ ] 5) uma função auxiliar para normalizar vetores (lembre-se que a base do observador deve ser ortonormal);
 - [ ] 6) uma função que cria uma face de um objeto tridimensional (corresponde a aresta do objeto 2D);
 - [ ] 7) uma função que realiza uma mudança de base entre bases ortonormais;
 - [ ] 8) uma função que realiza uma projeção perspectiva na forma de uma transformação linear considerando coordenadas homegêneas;
 - [ ] 9) uma função que implementa uma curva de Bèzier ou uma função que implementa uma B-Spline (escolha uma!);
 - [ ] 10) funções que realizam o deslocamento, rotação, escalonamento, cisalhamento e espelhamento na forma de operadores lineares considerando coordenadas homegêneas no espaço tridimensional;
-- [ ] 11) uma função para o algoritmo "z-buffer";
+- [ ] 11) uma função para o algoritmo "z-buffer" (exercício opcional, pois provavelmente não teremos tempo hábil para discutir essa teoria em sala de aula);
+- [ ] 12) uma função que implementa a multiplicação de uma matriz por um vetor (já considerando coordenadas homogêneas, isto é, matrizes de tamanho 4 x 4 no caso tridimendional);
+- [ ] 13) uma função que implementa a multiplicação de duas matrizes 4 x 4.
+
+Obs 01: as funções dos itens 7, 8 e 10, podem todas ser implementadas com a função do item 12;
+
+Obs 02: a geração da base do observador seguindo os passos dados em sala de aula já garante que a base seja orientada
+positivamente, isto é, seguindo a regra da mão direita. Contudo, se o aluno optar por uma forma diferente, deverá criar
+uma função que verifique se a nova base é positiva, pois, caso contrário, os resultados não serão consistentes.
 
 ##### TO-DO
 
