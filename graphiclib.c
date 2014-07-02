@@ -12,7 +12,7 @@
 /*--------------------------------------------------------------------------------------------*/
 /*void multMatrix(float matrizA[][3], int matrizB[][1], int* matrizC){
 
-	int i, j, x, Aux = 0; //oi
+	int i, j, x, Aux = 0;
 
 	//multiplica matrizes
 	for(i=0; i<3; i++) {
@@ -149,7 +149,7 @@ void getValues(point *ptOne, point *ptTwo){
 
 /*--------------------------------------------------------------------------------------------*/
 void setViewPort(point *viewPortXY){
-	printf("Defina as dimensoes do dispositivo discreto:\n\nHorizontal: ");
+	printf("\nDefina as dimensoes do dispositivo discreto:\n\nHorizontal: ");
 	scanf("%f", &viewPortXY->x);
 	printf("Vertical: ");
 	scanf("%f", &viewPortXY->y);
@@ -328,7 +328,18 @@ void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 
 }
 
-/*----Operaçoes em objetos--------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------*/
+void translate(list *p_L){
+	int dx, dy;
+
+	printf("Quantidade a ser transladada em relacao ao eixo X: ");
+	scanf("%d", &dx);
+	printf("Quantidade a ser transladada em relacao ao eixo Y: ");
+	scanf("%d", &dy);
+
+	//translation matrix
+}
+
 /*void translate(list *p_l) {
 	node *auxNode;
 	auxNode = *p_l;
