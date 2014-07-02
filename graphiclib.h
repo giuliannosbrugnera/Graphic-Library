@@ -16,7 +16,7 @@
 /*Point data structure*/
 
 typedef struct Point{
-	float x, y, z;
+	float x, y;
 } point;
 
 /*Color data structure*/
@@ -45,13 +45,13 @@ typedef node *list;
 
 int startList(list *p_l);
 int emptyList(list *p_l);
-void addEndList(list *p_l, point *pt, point *maxXYZ, point *minXYZ, point *viewPortXYZ, int option);
+void addEndList(list *p_l, point *pt, point *maxXY, point *minXY, point *viewPortXY);
 void freeList(list *p_l);
 void showList(list *p_l);
 void printListBresenham(list *p_l, char *input, point *viewPortXY);
 
-void setUniverse(point *minXYZ, point *maxXYZ, int option);
-void getUniverse(point *minXYZ, point *maxXYZ, int option);
+void setUniverse(point *minXY, point *maxXY);
+void getUniverse(point *minXY, point *maxXY);
 
 void setValues(point *ptOne, point *ptTwo);
 void getValues(point *ptOne, point *ptTwo);
@@ -61,9 +61,9 @@ void getViewPort(point *viewPortXY);
 
 void initMatrix(char *image, point *viewPortXY);
 
-point sruToSrn(point *pt, point *maxXYZ, point *minXYZ, int option);
+point sruToSrn(point *pt, point *maxXY, point *minXY);
 point srnToSrd(point *ptN, point *viewPortXY);
-void getSrn(point *ptOneN, point *ptTwoN, int option);
+void getSrn(point *ptOneN, point *ptTwoN);
 void getSrd(point *ptOneD, point *ptTwoD);
 
 void drawLine(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY);
