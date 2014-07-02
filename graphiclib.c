@@ -529,20 +529,20 @@ void drawWindowLine(point *viewPortXY, int *input, lookup *lkt){
 	XGCValues             values;
 	int                   m, n, screen, dplanes;
 	int                   width, height, ret = 1;
-	RGB          		  * cor, *lineColor;
+	//RGB          		  * cor, *lineColor;
 
 	width = viewPortXY->x;
 	height = viewPortXY->y;
 
-	cor = (RGB *) malloc(sizeof(RGB)); 
-	cor->r = 0.0;
-	cor->g = 1.0;
-	cor->b = 1.0;
+	// cor = (RGB *) malloc(sizeof(RGB)); 
+	// cor->r = 0.0;
+	// cor->g = 1.0;
+	// cor->b = 1.0;
 
-	lineColor = (RGB *) malloc(sizeof(RGB)); 
-	lineColor->r = 0.0;
-	lineColor->g = 0.0;
-	lineColor->b = 1.0;
+	// lineColor = (RGB *) malloc(sizeof(RGB)); 
+	// lineColor->r = 0.0;
+	// lineColor->g = 0.0;
+	// lineColor->b = 1.0;
 
 	char image[(int)viewPortXY->x][(int)viewPortXY->y];
 
@@ -571,35 +571,35 @@ void drawWindowLine(point *viewPortXY, int *input, lookup *lkt){
 	  
 	    ximage = XCreateImage(display,visual,dplanes,ZPixmap,0,malloc(width*height*sizeof(int)),width,height,8,0);
 
-	    /*for(m=0;m<height;m++) {
-	      for(n=0;n<width;n++) {
-	        ximage -> data[(m*4)*width+n*4] = (char) round((lkt[image[m][n]].colors->r)*255);
-	        ximage -> data[(m*4)*width+n*4+1] = (char) round((lkt[image[m][n]].colors->g)*255);
-	        ximage -> data[(m*4)*width+n*4+2] = (char) round((lkt[image[m][n]].colors->b)*255);
-	        ximage -> data[(m*4)*width+n*4+3] = (char) 0;
-	        }
-	    }*/
-
 	    for(m=0;m<height;m++) {
 	      for(n=0;n<width;n++) {
-	        ximage -> data[(m*4)*width+n*4] = (char) round((cor->b)*255);
-	        ximage -> data[(m*4)*width+n*4+1] = (char) round((cor->g)*255);
-	        ximage -> data[(m*4)*width+n*4+2] = (char) round((cor->r)*255);
+	        ximage -> data[(m*4)*width+n*4] = (char) round((lkt[image[m][n]].colors.r)*255);
+	        ximage -> data[(m*4)*width+n*4+1] = (char) round((lkt[image[m][n]].colors.g)*255);
+	        ximage -> data[(m*4)*width+n*4+2] = (char) round((lkt[image[m][n]].colors.b)*255);
 	        ximage -> data[(m*4)*width+n*4+3] = (char) 0;
 	        }
 	    }
 
-	    //draws the line
-	    for(m=0;m<height;m++) {
-	      for(n=0;n<width;n++) {
-	        if(image[m][n] == 1){
-		        ximage -> data[(m*4)*width+n*4] = (char) round((lineColor->b)*255);
-		        ximage -> data[(m*4)*width+n*4+1] = (char) round((lineColor->g)*255);
-		        ximage -> data[(m*4)*width+n*4+2] = (char) round((lineColor->r)*255);
-		        ximage -> data[(m*4)*width+n*4+3] = (char) 0;
-	    	}
-	      }
-	    }
+	    // for(m=0;m<height;m++) {
+	    //   for(n=0;n<width;n++) {
+	    //     ximage -> data[(m*4)*width+n*4] = (char) round((cor->b)*255);
+	    //     ximage -> data[(m*4)*width+n*4+1] = (char) round((cor->g)*255);
+	    //     ximage -> data[(m*4)*width+n*4+2] = (char) round((cor->r)*255);
+	    //     ximage -> data[(m*4)*width+n*4+3] = (char) 0;
+	    //     }
+	    // }
+
+	    // //draws the line
+	    // for(m=0;m<height;m++) {
+	    //   for(n=0;n<width;n++) {
+	    //     if(image[m][n] == 1){
+		   //      ximage -> data[(m*4)*width+n*4] = (char) round((lineColor->b)*255);
+		   //      ximage -> data[(m*4)*width+n*4+1] = (char) round((lineColor->g)*255);
+		   //      ximage -> data[(m*4)*width+n*4+2] = (char) round((lineColor->r)*255);
+		   //      ximage -> data[(m*4)*width+n*4+3] = (char) 0;
+	    // 	}
+	    //   }
+	    // }
 
 	   	/* Trata os eventos */
 	    while(1) {

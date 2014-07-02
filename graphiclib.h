@@ -32,8 +32,8 @@ typedef struct HSV {
 /*Look-up table structure*/
 typedef struct Lookup{
 	int numColors;
-	RGB *colors;
-} lookup;
+	RGB colors;
+}lookup;
 
 /*Objects data structure*/
 
