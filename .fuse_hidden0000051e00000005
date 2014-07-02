@@ -18,7 +18,7 @@ $ make uninstall    # remove arquivos temporários e o executável
 - [x] 2) uma estrutura com as dimensões mínimas e máximas de uma "viewport";
 - [x] 3) uma estrutura para um ponto bidimensional;
 - [x] 4) uma estrutura para um objeto bidimensional;
-- [x] 5) uma estrutura para uma "look up table";
+- [ ] 5) uma estrutura para uma "look up table";
 - [x] 6) uma função que converte coordenadas do SRU para o SRN;
 - [x] 7) uma função que converte coordenadas do SRN para o SRD;
 - [ ] 8) uma função que cria um buffer associado ao SRD;

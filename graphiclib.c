@@ -54,10 +54,6 @@ void addEndList(list *p_l, point *pt, point *maxXY, point *minXY, point *viewPor
 	//convertes the newNode to srd
 	newNode->ptListD = srnToSrd(&auxPointN, viewPortXY);
 
-	/*//prints the normalized and discrete point to check the values
-	printf("\nnormalizado: [%.4f %.4f]", newNode->ptListN.x, newNode->ptListN.y);
-	printf("\ndiscreto: [%.4f %.4f]\n", newNode->ptListD.x, newNode->ptListD.y);*/
-
 	//puts the newNode in the end of the list
 	if(emptyList(p_l)){
 		*p_l = newNode;
@@ -89,16 +85,16 @@ void showList(list *p_l){
 	auxNode = *p_l;
 
 	while(auxNode != NULL){
-		/*printf("\nCoordenadas dos pontos: [%.2f %.2f] ", auxNode->ptList.x, auxNode->ptList.y);
+		printf("\nCoordenadas dos pontos: [%.2f %.2f] ", auxNode->ptList.x, auxNode->ptList.y);
 		printf("\nPontos normalizados: [%.2f %.2f] ", auxNode->ptListN.x, auxNode->ptListN.y);
-		printf("\nPontos discretos: [%.2f %.2f] ", auxNode->ptListD.x, auxNode->ptListD.y);*/
+		printf("\nPontos discretos: [%.2f %.2f] ", auxNode->ptListD.x, auxNode->ptListD.y);
 		auxNode = auxNode->next;
 	}
 
 	printf("\n");
 }
 
-void printListBresenham(list *p_l, char *input, point *viewPortXY){
+void printListBresenham(list *p_l, int *input, point *viewPortXY, int color){
 	node *auxNode;
 	auxNode = *p_l;
 	point ptOneD, ptTwoD;
@@ -107,7 +103,7 @@ void printListBresenham(list *p_l, char *input, point *viewPortXY){
 		ptOneD = auxNode->ptListD;
 		if(auxNode->next != NULL){
 			ptTwoD = auxNode->next->ptListD;
-			bresenham(input, &ptOneD, &ptTwoD, viewPortXY);
+			bresenham(input, &ptOneD, &ptTwoD, viewPortXY, color);
 		}
 		auxNode = auxNode->next;
 	}
@@ -160,11 +156,11 @@ void getViewPort(point *viewPortXY){
 }
 
 /*--------------------------------------------------------------------------------------------*/
-void initMatrix(char *image, point *viewPortXY){
+void initMatrix(int *image, point *viewPortXY){
 	int i, j;
 	for(i = 0; i < viewPortXY->x; i++){
 		for(j = 0; j < viewPortXY->y; j++){
-			image[(i * (int)viewPortXY->y) + j] = ' ';
+			image[(i * (int)viewPortXY->y) + j] = 0;
 		}
 	}
 }
@@ -195,7 +191,7 @@ void getSrd(point *ptOneD, point *ptTwoD){
 }
 
 /*--------------------------------------------------------------------------------------------*/
-void drawLine(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
+void drawLine(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 	int i, j;
 	float x1, x2, y1, y2, a, b, x, y;
 
@@ -217,7 +213,7 @@ void drawLine(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 	//initializing the matrix
 	for(i = 0; i < viewPortXY->x; i++){
 		for(j = 0; j < viewPortXY->y; j++){
-			image[i][j] = ' ';
+			image[i][j] = 0;
 		}
 	}
 
@@ -227,7 +223,7 @@ void drawLine(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 	i = x1;
 	j = viewPortXY->y - y1;
 
-	image[j][i] = '1';
+	image[j][i] = 0;
 
 	x = x1++;
 	y = a * x + b;
@@ -235,7 +231,7 @@ void drawLine(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 	while(y < y2 - 1.0){
 		i = x;
 		j = viewPortXY->y - y;
-		image[j][i] = '1';
+		image[j][i] = 0;
 		y = a * (++x) + b;
 	}
 
@@ -256,7 +252,7 @@ void drawLine(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 	}
 }
 
-void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
+void bresenham(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY, int color){
 	int i = 0, j = 0, ystep = 0, steep = 0;
 	float x0 = 0, x1 = 0, y0 = 0, y1 = 0, aux = 0;
 
@@ -297,11 +293,12 @@ void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 		ystep = -1;
 	}
 
+	//defines the line that will be printed later
 	for(x = x0; x < x1; x++){
 		if(steep){
-			image[y][x] = '1';
+			image[y][x] = color;
 		} else {
-			image[x][y] = '1';
+			image[x][y] = color;
 		}
 		error = error - deltay;
 		if(error < 0){
@@ -316,15 +313,6 @@ void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 			input[(i * (int)viewPortXY->y) + j] = image[i][j];
 		}
 	}
-
-	//prints the result on screen
-	/*printf("\nLinha pelo algoritmo de Bresenham:\n\n");
-	for(i = 0; i < viewPortXY->x; i++){
-		for(j = 0; j < viewPortXY->y; j++){
-			printf("%c", image[i][j]);
-		}
-		printf("\n");
-	}*/
 
 }
 
@@ -531,7 +519,7 @@ void drawWindow(point *viewPortXY){
   	XCloseDisplay(display);
 }
 
-void drawWindowLine(point *viewPortXY, char *input){
+void drawWindowLine(point *viewPortXY, int *input, lookup *lkt){
 	Display               * display;
 	XImage                * ximage;
 	Window                window;
@@ -583,6 +571,15 @@ void drawWindowLine(point *viewPortXY, char *input){
 	  
 	    ximage = XCreateImage(display,visual,dplanes,ZPixmap,0,malloc(width*height*sizeof(int)),width,height,8,0);
 
+	    /*for(m=0;m<height;m++) {
+	      for(n=0;n<width;n++) {
+	        ximage -> data[(m*4)*width+n*4] = (char) round((lkt[image[m][n]].colors->r)*255);
+	        ximage -> data[(m*4)*width+n*4+1] = (char) round((lkt[image[m][n]].colors->g)*255);
+	        ximage -> data[(m*4)*width+n*4+2] = (char) round((lkt[image[m][n]].colors->b)*255);
+	        ximage -> data[(m*4)*width+n*4+3] = (char) 0;
+	        }
+	    }*/
+
 	    for(m=0;m<height;m++) {
 	      for(n=0;n<width;n++) {
 	        ximage -> data[(m*4)*width+n*4] = (char) round((cor->b)*255);
@@ -595,7 +592,7 @@ void drawWindowLine(point *viewPortXY, char *input){
 	    //draws the line
 	    for(m=0;m<height;m++) {
 	      for(n=0;n<width;n++) {
-	        if(image[m][n] == '1'){
+	        if(image[m][n] == 1){
 		        ximage -> data[(m*4)*width+n*4] = (char) round((lineColor->b)*255);
 		        ximage -> data[(m*4)*width+n*4+1] = (char) round((lineColor->g)*255);
 		        ximage -> data[(m*4)*width+n*4+2] = (char) round((lineColor->r)*255);
@@ -604,14 +601,14 @@ void drawWindowLine(point *viewPortXY, char *input){
 	      }
 	    }
 
-	   /* Trata os eventos */
+	   	/* Trata os eventos */
 	    while(1) {
 	    XNextEvent(display, &an_event);
 	    switch(an_event.type) {
-	case Expose:
+		case Expose:
 	            XPutImage(display,window,gc,ximage,0,0,0,0,width,height);
 	              break;
-	/* outros eventos ... */
+		/* outros eventos ... */
 	         }
 	      }
 

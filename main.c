@@ -51,7 +51,8 @@ int main(){
 		Matrix declaration and inicialization
 		-----------------------------------------*/
 
-		char image[(int)viewPortXY.x * (int)viewPortXY.y]; //creating the matrix
+		//char image[(int)viewPortXY.x * (int)viewPortXY.y]; //creating the matrix
+		int image[(int)viewPortXY.x * (int)viewPortXY.y]; //creating the matrix
 		initMatrix(image, &viewPortXY); //initializes the matrix
 
 		/*-----------------------------------------
@@ -61,9 +62,13 @@ int main(){
 		scanf("%d", &qObject);
 
 		list l[qObject]; //list that will contain the array of objects with its points
+		int objColor[qObject]; //array that contains the color of each object
 		point pt; //point entered by the user that is added to the list
 
 		for(j = 0; j < qObject; j++){
+			printf("\nQual a cor do objeto %d: ", j+1);
+			scanf("%d", &objColor[j]);
+
 			printf("\nQuantos pontos o objeto %d ira possuir: ", j+1);
 			scanf("%d", &qPoint);
 			printf("\n");
@@ -85,9 +90,19 @@ int main(){
 		}
 
 		/*-----------------------------------------
+		Look-up table definition
+		-----------------------------------------*/
+		lookup lkt[7];
+		lkt[1].colors->r = 0; lkt[1].colors->g = 0; lkt[1].colors->b = 0;
+		lkt[2].colors->r = 1; lkt[2].colors->g = 1; lkt[2].colors->b = 1;
+		lkt[3].colors->r = 1; lkt[3].colors->g = 1; lkt[3].colors->b = 0;
+		lkt[4].colors->r = 1; lkt[4].colors->g = 0; lkt[4].colors->b = 0;
+		lkt[5].colors->r = 0; lkt[5].colors->g = 1; lkt[5].colors->b = 0;
+		lkt[6].colors->r = 0; lkt[6].colors->g = 0; lkt[6].colors->b = 1;
+
+		/*-----------------------------------------
 		Menu
 		-----------------------------------------*/	
-
 		printf("\e[H\e[2J"); //cleans the unix terminal
 		printf("--------------------------\n");
 		printf("2D - Menu de operacoes\n");
@@ -113,14 +128,17 @@ int main(){
 			exit(0);
 		}
 
+		/*-----------------------------------------
+		Matrix generation and printing on screen
+		-----------------------------------------*/	
 		for(j = 0; j < qObject; j++){
 			//calls the function of the list responsible for printing the lines using Bresenham's algorithm
-			printListBresenham(&l[j], image, &viewPortXY);
+			printListBresenham(&l[j], image, &viewPortXY, objColor[j]);
 		}
 
-		//TO-DO: misses passing color, here we may pass the look up table (I guess)
-		drawWindowLine(&viewPortXY, image);
-		
+		//prints the objects with the defined colors
+		drawWindowLine(&viewPortXY, image, lkt);
+
 	}
 
 	/*=========================================
