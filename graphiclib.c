@@ -38,21 +38,18 @@ int emptyList(list *p_l){
 	return 0;
 }
 
-void addEndList(list *p_l, point *pt, point *maxXYZ, point *minXYZ, point *viewPortXY, int option){
+void addEndList(list *p_l, point *pt, point *maxXY, point *minXY, point *viewPortXY){
 	point auxPointN;
 	node *newNode, *auxNode;
 	newNode = (node*) malloc (sizeof(node));
 	
 	newNode->ptList.x = pt->x;
 	newNode->ptList.y = pt->y;
-	if(option){
-		newNode->ptList.z = pt->z;
-	}
 	newNode->next = NULL;
 
 	//converts the newNode to srn
-	newNode->ptListN = sruToSrn(pt, maxXYZ, minXYZ, option);
-	auxPointN = sruToSrn(pt, maxXYZ, minXYZ, option);
+	newNode->ptListN = sruToSrn(pt, maxXY, minXY);
+	auxPointN = sruToSrn(pt, maxXY, minXY);
 
 	//convertes the newNode to srd
 	newNode->ptListD = srnToSrd(&auxPointN, viewPortXY);
@@ -117,35 +114,20 @@ void printListBresenham(list *p_l, char *input, point *viewPortXY){
 }
 
 /*--------------------------------------------------------------------------------------------*/
-void setUniverse(point *minXYZ, point *maxXYZ, int option){
+void setUniverse(point *minXY, point *maxXY){
 	printf("\nDefina os valores minimos do universo:\n\nCoordenada X: ");
-	scanf("%f", &minXYZ->x);
+	scanf("%f", &minXY->x);
 	printf("Coordenada Y: ");
-	scanf("%f", &minXYZ->y);
-	//in case the user choses 3D universe
-	if(option){
-		printf("Coordenada Z: ");
-		scanf("%f", &minXYZ->z);
-	}
+	scanf("%f", &minXY->y);
 	printf("\nDefina os valores maximos do universo:\n\nCoordenada X: ");
-	scanf("%f", &maxXYZ->x);
+	scanf("%f", &maxXY->x);
 	printf("Coordenada Y: ");
-	scanf("%f", &maxXYZ->y);
-	//in case the user choses 3D universe
-	if(option){
-		printf("Coordenada Z: ");
-		scanf("%f", &maxXYZ->z);
-	}
+	scanf("%f", &maxXY->y);
 }
 
-void getUniverse(point *minXYZ, point *maxXYZ, int option){
-	if(!option){
-		printf("Coordendas minimas do universo: [%.4f, %.4f]\n", minXYZ->x, minXYZ->y);
-		printf("Coordendas maximas do universo: [%.4f, %.4f]\n\n", maxXYZ->x, maxXYZ->y);
-	} else {
-		printf("Coordendas minimas do universo: [%.4f, %.4f, %.4f]\n", minXYZ->x, minXYZ->y, minXYZ->z);
-		printf("Coordendas maximas do universo: [%.4f, %.4f, %.4f]\n\n", maxXYZ->x, maxXYZ->y, maxXYZ->z);
-	}
+void getUniverse(point *minXY, point *maxXY){
+	printf("Coordendas minimas do universo: [%.4f, %.4f]\n", minXY->x, minXY->y);
+	printf("Coordendas maximas do universo: [%.4f, %.4f]\n\n", maxXY->x, maxXY->y);
 }
 
 /*--------------------------------------------------------------------------------------------*/
@@ -188,13 +170,10 @@ void initMatrix(char *image, point *viewPortXY){
 }
 
 /*--------------------------------------------------------------------------------------------*/
-point sruToSrn(point *pt, point *maxXYZ, point *minXYZ, int option){
+point sruToSrn(point *pt, point *maxXY, point *minXY){
 	point ptN;	
-	ptN.x = (pt->x - minXYZ->x) / (maxXYZ->x - minXYZ->x);
-	ptN.y = (pt->y - minXYZ->y) / (maxXYZ->y - minXYZ->y);
-	if(option){
-		ptN.z = (pt->z - minXYZ->z) / (maxXYZ->z - minXYZ->z);
-	}
+	ptN.x = (pt->x - minXY->x) / (maxXY->x - minXY->x);
+	ptN.y = (pt->y - minXY->y) / (maxXY->y - minXY->y);
 	return ptN;
 }
 
@@ -205,14 +184,9 @@ point srnToSrd(point *ptN, point *viewPortXY){
 	return ptD;
 }
 
-void getSrn(point *ptOneN, point *ptTwoN, int option){
-	if(!option){
-		printf("Primeiro ponto normalizado: [%.4f, %.4f]\n", ptOneN->x, ptOneN->y);
-		printf("Segundo ponto normalizado: [%.4f, %.4f]\n\n", ptTwoN->x, ptTwoN->y);
-	} else {
-		printf("Primeiro ponto normalizado: [%.4f, %.4f, %.4f]\n", ptOneN->x, ptOneN->y, ptOneN->z);
-		printf("Segundo ponto normalizado: [%.4f, %.4f, %.4f]\n\n", ptTwoN->x, ptTwoN->y, ptTwoN->z);
-	}
+void getSrn(point *ptOneN, point *ptTwoN){
+	printf("Primeiro ponto normalizado: [%.4f, %.4f]\n", ptOneN->x, ptOneN->y);
+	printf("Segundo ponto normalizado: [%.4f, %.4f]\n\n", ptTwoN->x, ptTwoN->y);
 }
 
 void getSrd(point *ptOneD, point *ptTwoD){
