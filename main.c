@@ -23,6 +23,18 @@ int main(){
 	int listNum; //user decides which object he/she wants to apply transformations
 	int menu; //stores the menu input by the user
 
+	/*-----------------------------------------
+		Look-up table definition
+		-----------------------------------------*/
+		lookup lkt[7];
+		lkt[0].colors.r = 0; lkt[0].colors.g = 0; lkt[0].colors.b = 0;
+		lkt[1].colors.r = 0; lkt[1].colors.g = 0; lkt[1].colors.b = 0;
+		lkt[2].colors.r = 1; lkt[2].colors.g = 1; lkt[2].colors.b = 1;
+		lkt[3].colors.r = 1; lkt[3].colors.g = 1; lkt[3].colors.b = 0;
+		lkt[4].colors.r = 1; lkt[4].colors.g = 0; lkt[4].colors.b = 0;
+		lkt[5].colors.r = 0; lkt[5].colors.g = 1; lkt[5].colors.b = 0;
+		lkt[6].colors.r = 0; lkt[6].colors.g = 0; lkt[6].colors.b = 1;
+
 	printf("Deseja trabalhar em qual dimensao?\n\n- [0] para 2D;\n- [1] para 3D.\n\n-> ");
 	scanf("%d", &option);
 	
@@ -88,17 +100,6 @@ int main(){
 				addEndList(&l[j], &pt, &maxXY, &minXY, &viewPortXY);
 			}
 		}
-
-		/*-----------------------------------------
-		Look-up table definition
-		-----------------------------------------*/
-		lookup lkt[7];
-		lkt[1].colors->r = 0; lkt[1].colors->g = 0; lkt[1].colors->b = 0;
-		lkt[2].colors->r = 1; lkt[2].colors->g = 1; lkt[2].colors->b = 1;
-		lkt[3].colors->r = 1; lkt[3].colors->g = 1; lkt[3].colors->b = 0;
-		lkt[4].colors->r = 1; lkt[4].colors->g = 0; lkt[4].colors->b = 0;
-		lkt[5].colors->r = 0; lkt[5].colors->g = 1; lkt[5].colors->b = 0;
-		lkt[6].colors->r = 0; lkt[6].colors->g = 0; lkt[6].colors->b = 1;
 
 		/*-----------------------------------------
 		Menu
