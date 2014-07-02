@@ -16,7 +16,7 @@
 /*Point data structure*/
 
 typedef struct Point{
-	float x, y;
+	float x, y;	
 } point;
 
 /*Color data structure*/
@@ -28,6 +28,12 @@ typedef struct RGB {
 typedef struct HSV {
 	float h, s, v;
 }HSV;
+
+/*Look-up table structure*/
+typedef struct Lookup{
+	int numColors;
+	RGB *colors;
+} lookup;
 
 /*Objects data structure*/
 
@@ -48,7 +54,7 @@ int emptyList(list *p_l);
 void addEndList(list *p_l, point *pt, point *maxXY, point *minXY, point *viewPortXY);
 void freeList(list *p_l);
 void showList(list *p_l);
-void printListBresenham(list *p_l, char *input, point *viewPortXY);
+void printListBresenham(list *p_l, int *input, point *viewPortXY, int color);
 
 void setUniverse(point *minXY, point *maxXY);
 void getUniverse(point *minXY, point *maxXY);
@@ -59,15 +65,15 @@ void getValues(point *ptOne, point *ptTwo);
 void setViewPort(point *viewPortXY);
 void getViewPort(point *viewPortXY);
 
-void initMatrix(char *image, point *viewPortXY);
+void initMatrix(int *image, point *viewPortXY);
 
 point sruToSrn(point *pt, point *maxXY, point *minXY);
 point srnToSrd(point *ptN, point *viewPortXY);
 void getSrn(point *ptOneN, point *ptTwoN);
 void getSrd(point *ptOneD, point *ptTwoD);
 
-void drawLine(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY);
-void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY);
+void drawLine(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY);
+void bresenham(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY, int color);
 
 void translate(list *p_L);
 //void translate(list *p_l);
@@ -76,7 +82,7 @@ void translate(list *p_L);
 //void mirror(list *p_l);
 
 void drawWindow(point *viewPortXY);
-void drawWindowLine(point *viewPortXY, char *input);
+void drawWindowLine(point *viewPortXY, int *input, lookup *lkt);
 
 void rgbTohsv(RGB rgb, HSV *hsv);
 void hsvTorgb(HSV hsv, RGB *rgb);
