@@ -82,40 +82,45 @@ int main(){
 				//adds this point to the list
 				addEndList(&l[j], &pt, &maxXY, &minXY, &viewPortXY);
 			}
+		}
 
-			printf("\e[H\e[2J"); //cleans the unix terminal
-			printf("--------------------------\n");
-			printf("2D - Menu de operacoes\n");
-			printf("--------------------------\n\n");
+		/*-----------------------------------------
+		Menu
+		-----------------------------------------*/	
 
-			printf("- [0] Deslocamento;\n");
-			printf("- [1] Rotacao;\n");
-			printf("- [2] Escalonamento;\n");
-			printf("- [3] Cisalhamento;\n");
-			printf("- [4] Espelhamento;\n");
-			printf("- [5] Exibir a imagem;\n");
-			printf("- [6] Sair;\n");
+		printf("\e[H\e[2J"); //cleans the unix terminal
+		printf("--------------------------\n");
+		printf("2D - Menu de operacoes\n");
+		printf("--------------------------\n\n");
 
-			printf("\n-> ");
-			scanf("%d", &menu);
+		printf("- [0] Deslocamento;\n");
+		printf("- [1] Rotacao;\n");
+		printf("- [2] Escalonamento;\n");
+		printf("- [3] Cisalhamento;\n");
+		printf("- [4] Espelhamento;\n");
+		printf("- [5] Exibir a imagem;\n");
+		printf("- [6] Sair;\n");
 
-			//translation option
-			if(menu == 0){
-				printf("\nQual objeto deseja deslocar: ");
-				scanf("%d", &listNum);
-				translate(&l[listNum-1]);
-			} else if(menu == 6){
-				exit(0);
-			}
+		printf("\n-> ");
+		scanf("%d", &menu);
 
+		//translation option
+		if(menu == 0){
+			printf("\nQual objeto deseja deslocar: ");
+			scanf("%d", &listNum);
+			translate(&l[listNum-1]);
+		} else if(menu == 6){
+			exit(0);
+		}
+
+		for(j = 0; j < qObject; j++){
 			//calls the function of the list responsible for printing the lines using Bresenham's algorithm
 			printListBresenham(&l[j], image, &viewPortXY);
-
-		}		
+		}
 
 		//TO-DO: misses passing color, here we may pass the look up table (I guess)
 		drawWindowLine(&viewPortXY, image);
-
+		
 	}
 
 	/*=========================================
