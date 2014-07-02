@@ -69,7 +69,6 @@ void getSrd(point *ptOneD, point *ptTwoD);
 void drawLine(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY);
 void bresenham(char *input, point *ptOneD, point *ptTwoD, point *viewPortXY);
 
-void translate(list *p_L);
 //void translate(list *p_l);
 //void rotate(list *p_l);
 //void scale(list *p_l);
