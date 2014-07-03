@@ -203,7 +203,7 @@ void drawLine(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 	//defines the matrix that will be used to generate the image
 	char image[(int)viewPortXY->x][(int)viewPortXY->y];
 
-	//decoding the vector of chars to a matrix to simplify the understanding of attributions
+	//decoding the vector of ints to a matrix to simplify the understanding of attributions
 	for(i = 0; i < viewPortXY->x; i++){
 		for(j = 0; j < viewPortXY->y; j++){
 			image[i][j] = input[(i * (int)viewPortXY->y) + j];
@@ -239,7 +239,7 @@ void drawLine(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 	printf("\nLinha pelo primeiro metodo:\n");
 	for(i = 0; i < viewPortXY->x; i++){
 		for(j = 0; j < viewPortXY->y; j++){
-			printf("%c", image[i][j]);
+			printf("%d", image[i][j]);
 		}
 		printf("\n");
 	}
@@ -275,7 +275,7 @@ void bresenham(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY, int 
 
 	char image[(int)viewPortXY->x][(int)viewPortXY->y];
 
-	//decoding the vector of chars to a matrix to simplify the understanding of attributions
+	//decoding the vector of int to a matrix to simplify the understanding of attributions
 	for(i = 0; i < viewPortXY->x; i++){
 		for(j = 0; j < viewPortXY->y; j++){
 			image[i][j] = input[(i * (int)viewPortXY->y + j)];
@@ -307,7 +307,7 @@ void bresenham(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY, int 
 		}
 	}
 
-	//copying back the matrix to the vector of char
+	//copying back the matrix to the vector of int
 	for(i = 0; i < viewPortXY->x; i++){
 		for(j = 0; j < viewPortXY->y; j++){
 			input[(i * (int)viewPortXY->y) + j] = image[i][j];
@@ -317,15 +317,51 @@ void bresenham(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY, int 
 }
 
 /*--------------------------------------------------------------------------------------------*/
-void translate(list *p_L){
-	int dx, dy;
+void multMatrixArray(float *matrix, float *vector, float *result){
+	
+	//multiplicating the matrix by the vector
+	result[0] = (matrix[0] * vector[0]) + (matrix[1] * vector[1]) + (matrix[2] * vector[2]);
+	result[1] = (matrix[3] * vector[0]) + (matrix[4] * vector[1]) + (matrix[5] * vector[2]);
+	result[2] = (matrix[6] * vector[0]) + (matrix[7] * vector[1]) + (matrix[8] * vector[2]);
 
-	printf("Quantidade a ser transladada em relacao ao eixo X: ");
+}
+
+void translate(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
+	int dx, dy; //variables that stores the displacements
+	node *auxNode; //points to the object that will be translated
+	point pt, ptN; //auxiliar points
+
+	auxNode = *p_L;
+
+	printf("Quantidade a ser transladada em relacao ao eixo X do universo: ");
 	scanf("%d", &dx);
-	printf("Quantidade a ser transladada em relacao ao eixo Y: ");
+	printf("Quantidade a ser transladada em relacao ao eixo Y do universo: ");
 	scanf("%d", &dy);
 
-	//translation matrix
+	//translation matrix declaration
+	float transMatrix[9] = {1, 0, dx, 0, 1, dy, 0, 0, 1};
+	//point vector and result array declaration
+	float p[3], result[3];
+
+	while(auxNode != NULL){
+
+		p[0] = auxNode->ptList.x;
+		p[1] = auxNode->ptList.y;
+		p[2] = 1;
+
+		multMatrixArray(transMatrix, p, result);
+
+		//updating the point values
+		auxNode->ptList.x = pt.x = result[0];
+		auxNode->ptList.y = pt.y = result[1];
+
+		//converts the translated point to srn
+		auxNode->ptListN = ptN = sruToSrn(&pt, maxXY, minXY);
+		//converts the translated point to srd
+		auxNode->ptListD = srnToSrd(&ptN, viewPortXY);
+
+		auxNode = auxNode->next;
+	}
 }
 
 /*void translate(list *p_l) {
@@ -534,19 +570,9 @@ void drawWindowLine(point *viewPortXY, int *input, lookup *lkt){
 	width = viewPortXY->x;
 	height = viewPortXY->y;
 
-	// cor = (RGB *) malloc(sizeof(RGB)); 
-	// cor->r = 0.0;
-	// cor->g = 1.0;
-	// cor->b = 1.0;
-
-	// lineColor = (RGB *) malloc(sizeof(RGB)); 
-	// lineColor->r = 0.0;
-	// lineColor->g = 0.0;
-	// lineColor->b = 1.0;
-
 	char image[(int)viewPortXY->x][(int)viewPortXY->y];
 
-	//decoding the vector of chars to a matrix to simplify the understanding of attributions
+	//decoding the vector of ints to a matrix to simplify the understanding of attributions
 	for(m = 0; m < viewPortXY->x; m++){
 		for(n = 0; n < viewPortXY->y; n++){
 			image[m][n] = input[(m * (int)viewPortXY->y + n)];
@@ -579,27 +605,6 @@ void drawWindowLine(point *viewPortXY, int *input, lookup *lkt){
 	        ximage -> data[(m*4)*width+n*4+3] = (char) 0;
 	        }
 	    }
-
-	    // for(m=0;m<height;m++) {
-	    //   for(n=0;n<width;n++) {
-	    //     ximage -> data[(m*4)*width+n*4] = (char) round((cor->b)*255);
-	    //     ximage -> data[(m*4)*width+n*4+1] = (char) round((cor->g)*255);
-	    //     ximage -> data[(m*4)*width+n*4+2] = (char) round((cor->r)*255);
-	    //     ximage -> data[(m*4)*width+n*4+3] = (char) 0;
-	    //     }
-	    // }
-
-	    // //draws the line
-	    // for(m=0;m<height;m++) {
-	    //   for(n=0;n<width;n++) {
-	    //     if(image[m][n] == 1){
-		   //      ximage -> data[(m*4)*width+n*4] = (char) round((lineColor->b)*255);
-		   //      ximage -> data[(m*4)*width+n*4+1] = (char) round((lineColor->g)*255);
-		   //      ximage -> data[(m*4)*width+n*4+2] = (char) round((lineColor->r)*255);
-		   //      ximage -> data[(m*4)*width+n*4+3] = (char) 0;
-	    // 	}
-	    //   }
-	    // }
 
 	   	/* Trata os eventos */
 	    while(1) {

@@ -47,7 +47,6 @@ typedef struct Node{
 typedef node *list;
 
 /*Functions prototypes*/
-//void multMatrix(float matrizA[][3], int matrizB[][1], int* matrizC);
 
 int startList(list *p_l);
 int emptyList(list *p_l);
@@ -75,7 +74,9 @@ void getSrd(point *ptOneD, point *ptTwoD);
 void drawLine(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY);
 void bresenham(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY, int color);
 
-void translate(list *p_L);
+void multMatrixArray(float *matrix, float *vector, float *result);
+
+void translate(list *p_L, point *minXY, point *maxXY, point *viewPortXY);
 //void translate(list *p_l);
 //void rotate(list *p_l);
 //void scale(list *p_l);
