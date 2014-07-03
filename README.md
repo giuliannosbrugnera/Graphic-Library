@@ -29,7 +29,7 @@ $ make uninstall    # remove arquivos temporários e o executável
 - [ ] 13) funcões que realizam o deslocamento, rotação, escalonamento, cisalhamento e espelhamento na forma de operadores lineares considerando coordenadas homegêneas;
 - [x] 14) funções para a conversão entre os sistemas de cores RGB e HSV e vice-versa;
 - [x] 15) uma função para mapear o SRD no monitor para visualização (deve-se passar o SRD, matriz, e a "look up table");
-- [ ] 16) uma função que implementa a multiplicação de uma matriz por um vetor (já considerando coordenadas homogêneas, isto é, matrizes de tamanho 3 x 3 no caso bidimendional);
+- [x] 16) uma função que implementa a multiplicação de uma matriz por um vetor (já considerando coordenadas homogêneas, isto é, matrizes de tamanho 3 x 3 no caso bidimendional);
 - [ ] 17) uma função que implementa a multiplicação de duas matrizes 3 x 3.
 
 Obs: as funções do item 13 podem todas ser simplificadas com o uso da função do item 16, bastando passar a matriz correta
@@ -61,5 +61,5 @@ uma função que verifique se a nova base é positiva, pois, caso contrário, os
 
 - [ ] Realizar verificações em geral de tamanhos de janelas;
 - [ ] Estudar e implementar a mudança de base do SRN para o SRD (3D)
-- [ ] Função que multiplica uma matriz por um vetor (Retirar os Warnings) 
+- [x] Função que multiplica uma matriz por um vetor (Retirar os Warnings) 
 - [ ] Função que multiplica duas matrizes (Retirar os Warnings)

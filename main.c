@@ -26,14 +26,13 @@ int main(){
 	/*-----------------------------------------
 		Look-up table definition
 		-----------------------------------------*/
-		lookup lkt[7];
+		lookup lkt[6];
 		lkt[0].colors.r = 0; lkt[0].colors.g = 0; lkt[0].colors.b = 0;
-		lkt[1].colors.r = 0; lkt[1].colors.g = 0; lkt[1].colors.b = 0;
-		lkt[2].colors.r = 1; lkt[2].colors.g = 1; lkt[2].colors.b = 1;
-		lkt[3].colors.r = 1; lkt[3].colors.g = 1; lkt[3].colors.b = 0;
-		lkt[4].colors.r = 1; lkt[4].colors.g = 0; lkt[4].colors.b = 0;
-		lkt[5].colors.r = 0; lkt[5].colors.g = 1; lkt[5].colors.b = 0;
-		lkt[6].colors.r = 0; lkt[6].colors.g = 0; lkt[6].colors.b = 1;
+		lkt[1].colors.r = 1; lkt[2].colors.g = 1; lkt[2].colors.b = 1;
+		lkt[2].colors.r = 1; lkt[3].colors.g = 1; lkt[3].colors.b = 0;
+		lkt[3].colors.r = 1; lkt[4].colors.g = 0; lkt[4].colors.b = 0;
+		lkt[4].colors.r = 0; lkt[5].colors.g = 1; lkt[5].colors.b = 0;
+		lkt[5].colors.r = 0; lkt[6].colors.g = 0; lkt[6].colors.b = 1;
 
 	printf("Deseja trabalhar em qual dimensao?\n\n- [0] para 2D;\n- [1] para 3D.\n\n-> ");
 	scanf("%d", &option);
@@ -63,7 +62,6 @@ int main(){
 		Matrix declaration and inicialization
 		-----------------------------------------*/
 
-		//char image[(int)viewPortXY.x * (int)viewPortXY.y]; //creating the matrix
 		int image[(int)viewPortXY.x * (int)viewPortXY.y]; //creating the matrix
 		initMatrix(image, &viewPortXY); //initializes the matrix
 
@@ -120,25 +118,45 @@ int main(){
 		printf("\n-> ");
 		scanf("%d", &menu);
 
-		//translation option
-		if(menu == 0){
-			printf("\nQual objeto deseja deslocar: ");
-			scanf("%d", &listNum);
-			translate(&l[listNum-1]);
-		} else if(menu == 6){
-			exit(0);
-		}
+		while(menu != 6){
+			//translation option
+			if(menu == 0){
+				
+				printf("\nQual objeto deseja deslocar: ");
+				scanf("%d", &listNum);
+				translate(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
 
-		/*-----------------------------------------
-		Matrix generation and printing on screen
-		-----------------------------------------*/	
-		for(j = 0; j < qObject; j++){
-			//calls the function of the list responsible for printing the lines using Bresenham's algorithm
-			printListBresenham(&l[j], image, &viewPortXY, objColor[j]);
-		}
+			//matrix generation and printing on screen option
+			} else if(menu == 5){
+				
+				for(j = 0; j < qObject; j++){
+					//calls the function of the list responsible for printing the lines using Bresenham's algorithm
+					printListBresenham(&l[j], image, &viewPortXY, objColor[j]);
+				}
+				//prints the objects with the defined colors
+				drawWindowLine(&viewPortXY, image, lkt);
+			
+			//exiting option
+			} else if(menu == 6){
+				exit(0);
+			}
 
-		//prints the objects with the defined colors
-		drawWindowLine(&viewPortXY, image, lkt);
+			printf("\e[H\e[2J"); //cleans the unix terminal
+			printf("--------------------------\n");
+			printf("2D - Menu de operacoes\n");
+			printf("--------------------------\n\n");
+
+			printf("- [0] Deslocamento;\n");
+			printf("- [1] Rotacao;\n");
+			printf("- [2] Escalonamento;\n");
+			printf("- [3] Cisalhamento;\n");
+			printf("- [4] Espelhamento;\n");
+			printf("- [5] Exibir a imagem;\n");
+			printf("- [6] Sair;\n");
+
+			printf("\n-> ");
+			scanf("%d", &menu);
+		}
 
 	}
 
