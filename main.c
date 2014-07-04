@@ -18,7 +18,8 @@ int main(){
 	
 	int i, j; //iterators
 	point  minXY, maxXY, viewPortXY; //universe min and max and viewport dimensions
-	int qPoint, qObject; //stores the quantity of points and objects selected by the user
+	point3D minXYZ, maxXYZ; //universe3D min and max
+	int qPoint, qObject, qPointsFace, qFaces, qObject3D; //stores the quantity of points and objects selected by the user
 	int option; //user decides if wants to work with 2D or 3D dimension
 	int listNum; //user decides which object he/she wants to apply transformations
 	int menu; //stores the menu input by the user
@@ -53,7 +54,7 @@ int main(){
 		-----------------------------------------*/
 
 		setUniverse(&minXY, &maxXY); //setting universe values
-		//getUniverse(&minXY, &maxXY); //getting universe values
+		getUniverse(&minXY, &maxXY); //getting universe values
 
 		setViewPort(&viewPortXY); //setting the view port size according to user input
 		//getViewPort(&viewPortXY); //getting the view port dimensions
@@ -171,7 +172,60 @@ int main(){
 		printf("CG - Biblioteca Grafica de Funcoes 3D\n");
 		printf("-------------------------------------\n\n");
 
-		printf("Ainda nao implementado...\n\n");
+		/*-----------------------------------------
+		Universe and viewport setting
+		-----------------------------------------*/
+
+		setUniverse3D(&minXYZ, &maxXYZ); //setting universe values
+		//getUniverse3D(&minXYZ, &maxXYZ); //getting universe values
+
+		setViewPort(&viewPortXY); //setting the view port size according to user input
+		//getViewPort(&viewPortXY); //getting the view port dimensions
+
+		/*-----------------------------------------
+		Matrix declaration and inicialization
+		-----------------------------------------*/
+
+		int image[(int)viewPortXY.x * (int)viewPortXY.y]; //creating the matrix
+		initMatrix(image, &viewPortXY); //initializes the matrix
+
+		/*-----------------------------------------
+		Objects declaration
+		-----------------------------------------*/	
+		printf("\nQuantos objetos a imagem ira possuir: ");
+		scanf("%d", &qObject3D);
+
+		object3D objects[qObject3D]; //list that will contain the array of objects with its points
+		int objColor3D[qObject3D]; //array that contains the color of each object
+		point3D pt3D; //point entered by the user that is added to the list
+
+		for(j = 0; j < qObject3D; j++){
+			printf("\nQual a cor do objeto %d: ", j+1);
+			scanf("%d", &objColor3D[j]);
+
+			printf("\nQuantas faces o objeto 3D %d ira possuir: ", j+1);
+			scanf("%d", &qFaces);
+			printf("\n");
+
+			printf("\nQuantos pontos a face 3D %d ira possuir: ", j+1);
+			scanf("%d", &qPointsFace);
+			printf("\n");
+
+			startList(&l[j]); //starting the list
+
+			//fullfils the list with the points provided by the user
+			for(i = 0; i < qPoint; i++){
+				
+				printf("-> Ponto %d do objeto %d\n\nCoordenada X: ", i+1, j+1);
+				scanf("%f", &pt.x);
+				printf("Coordenada Y: ");
+				scanf("%f", &pt.y);
+				printf("\n");
+
+				//adds this point to the list
+				addEndList(&l[j], &pt, &maxXY, &minXY, &viewPortXY);
+			}
+		}
 	}
 
 	return 0;

@@ -33,8 +33,17 @@ int startList(list *p_l){
 	*p_l = NULL;
 }
 
+int startList3D(face3D *p_l3D){
+	*p_l3D = NULL;
+}
+
 int emptyList(list *p_l){
 	if(*p_l == NULL) return 1;
+	return 0;
+}
+
+int emptyList3D(face3D *p_l3D){
+	if(*p_l3D == NULL) return 1;
 	return 0;
 }
 
@@ -66,6 +75,27 @@ void addEndList(list *p_l, point *pt, point *maxXY, point *minXY, point *viewPor
 	}
 }
 
+void addEndList3D(face3D *face, point3D *pt3D, point3D *maxXYZ, point3D *minXYZ){
+	node3D *newNode3D, *auxNode3D;
+	newNode3D = (node3D*) malloc (sizeof(node3D));
+	
+	newNode3D->ptList3D.x = pt3D->x;
+	newNode3D->ptList3D.y = pt3D->y;
+	newNode3D->ptList3D.z = pt3D->z;
+	newNode3D->next = NULL;
+
+	//puts the newNode3D in the end of the list
+	if(emptyList3D(face)){
+		*face = newNode3D;
+	} else {
+		auxNode3D = *face;
+		while(auxNode3D->next != NULL){
+			auxNode3D = auxNode3D->next;
+		}
+		auxNode3D->next = newNode3D;
+	}
+}
+
 void freeList(list *p_l){
 	if(!emptyList(p_l)){
 		node *auxNode;
@@ -80,6 +110,20 @@ void freeList(list *p_l){
 	}
 }
 
+void freeList3D(face3D *face){
+	if(!emptyList3D(face)){
+		node3D *auxNode3D;
+
+		do{
+			auxNode3D = (*face)->next;
+			free(*face);
+			*face = auxNode3D;
+		} while(auxNode3D != NULL);
+
+		startList3D(face);
+	}
+}
+
 void showList(list *p_l){
 	node *auxNode;
 	auxNode = *p_l;
@@ -89,6 +133,18 @@ void showList(list *p_l){
 		printf("\nPontos normalizados: [%.2f %.2f] ", auxNode->ptListN.x, auxNode->ptListN.y);
 		printf("\nPontos discretos: [%.2f %.2f] ", auxNode->ptListD.x, auxNode->ptListD.y);
 		auxNode = auxNode->next;
+	}
+
+	printf("\n");
+}
+
+void showList3D(face3D *face){
+	node3D *auxNode3D;
+	auxNode3D = *face;
+
+	while(auxNode3D != NULL){
+		printf("\nCoordenadas dos pontos 3D: [%.2f %.2f %.2f] ", auxNode3D->ptList3D.x, auxNode3D->ptList3D.y, auxNode3D->ptList3D.z);
+		auxNode3D = auxNode3D->next;
 	}
 
 	printf("\n");
@@ -124,6 +180,26 @@ void setUniverse(point *minXY, point *maxXY){
 void getUniverse(point *minXY, point *maxXY){
 	printf("Coordendas minimas do universo: [%.4f, %.4f]\n", minXY->x, minXY->y);
 	printf("Coordendas maximas do universo: [%.4f, %.4f]\n\n", maxXY->x, maxXY->y);
+}
+
+void setUniverse3D(point3D *minXYZ, point3D *maxXYZ){
+	printf("\nDefina os valores minimos do universo 3D:\n\nCoordenada X: ");
+	scanf("%f", &minXYZ->x);
+	printf("Coordenada Y: ");
+	scanf("%f", &minXYZ->y);
+	printf("Coordenada Z: ");
+	scanf("%f", &minXYZ->z);
+	printf("\nDefina os valores maximos do universo 3D:\n\nCoordenada X: ");
+	scanf("%f", &maxXYZ->x);
+	printf("Coordenada Y: ");
+	scanf("%f", &maxXYZ->y);
+	printf("Coordenada Y: ");
+	scanf("%f", &maxXYZ->z);
+}
+
+void getUniverse3D(point3D *minXYZ, point3D *maxXYZ){
+	printf("Coordendas minimas do universo 3D: [%.4f, %.4f, %.4f]\n", minXYZ->x, minXYZ->y, minXYZ->z);
+	printf("Coordendas maximas do universo 3D: [%.4f, %.4f, %.4f]\n\n", maxXYZ->x, maxXYZ->y, maxXYZ->z);
 }
 
 /*--------------------------------------------------------------------------------------------*/
