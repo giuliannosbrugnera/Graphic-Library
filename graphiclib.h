@@ -13,11 +13,15 @@
 #include <math.h>
 #include <X11/Xlib.h>
 
-/*Point data structure*/
+/*Points data structure*/
 
 typedef struct Point{
 	float x, y;	
-} point;
+}point;
+
+typedef struct Point3D{
+	float x, y, z;	
+}point3D;
 
 /*Color data structure*/
 
@@ -37,6 +41,7 @@ typedef struct Lookup{
 
 /*Objects data structure*/
 
+// objects 2D
 typedef struct Node{
 	point ptList;  //coordinates of the point
 	point ptListN; //point normalized
@@ -45,6 +50,16 @@ typedef struct Node{
 }node;
 
 typedef node *list;
+
+// objects 3D
+typedef struct Node3D{
+	point3D ptList3D;  //coordinates of the point
+	struct Node3D *next;
+}node3D;
+
+typedef node3D *face3D;
+
+typedef face3D *object3D;
 
 /*Functions prototypes*/
 
@@ -88,5 +103,13 @@ void drawWindowLine(point *viewPortXY, int *input, lookup *lkt);
 void rgbTohsv(RGB rgb, HSV *hsv);
 void hsvTorgb(HSV hsv, RGB *rgb);
 
+int startList3D(face3D *face);
+int emptyList3D(face3D *face);
+void addEndList3D(face3D *face, point3D *pt3D, point3D *maxXYZ, point3D *minXYZ);
+void freeList3D(face3D *face);
+void showList3D(face3D *face);
+
+void setUniverse3D(point3D *minXYZ, point3D *maxXYZ);
+void getUniverse3D(point3D *minXYZ, point3D *maxXYZ);
 
 #endif /* __graphiclib_h__ */
