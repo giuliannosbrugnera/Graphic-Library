@@ -23,8 +23,6 @@ int main(){
 	int option; //user decides if wants to work with 2D or 3D dimension
 	int listNum; //user decides which object he/she wants to apply transformations
 	int menu; //stores the menu input by the user
-	list *l;
-	point pt;
 
 	/*-----------------------------------------
 		Look-up table definition
@@ -216,6 +214,8 @@ int main(){
 		object3D objects[qObject3D]; //list that will contain the array of objects with its points
 		int objColor3D[qObject3D]; //array that contains the color of each object
 		point3D pt3D; //point entered by the user that is added to the list
+		list *l = NULL;
+		point pt;
 
 		for(j = 0; j < qObject3D; j++){
 			printf("\nQual a cor do objeto %d: ", j+1);

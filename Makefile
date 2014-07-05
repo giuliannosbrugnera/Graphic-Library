@@ -5,7 +5,7 @@
 # Parameters to control Makefile operation
 
 CC = gcc
-CFLAGS = -Wall -lm -lX11
+CFLAGS = -lm -lX11
 
 # ****************************************************
 # Entries to bring the executable up to date
