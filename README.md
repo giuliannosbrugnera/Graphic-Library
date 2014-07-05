@@ -3,7 +3,9 @@
 
 Esta é uma biblioteca gráfica incrementada ao longo do semestre.
 
-#### Instruções para compilação
+#### Instruções para compilação e execução
+
+Você pode utilizar o makefile, usando os comandos abaixo.
 
 ```
 $ make              # compila os arquivos
@@ -11,10 +13,11 @@ $ ./program         # executa o programa
 $ make uninstall    # remove arquivos temporários e o executável
 ```
 
-Alternativamente, você pode compilar usando o comando abaixo.
+Alternativamente, você pode utilizar os comandos abaixos.
 
 ```
-gcc main.c graphiclib.c -o program -lm -lX11
+$ gcc main.c graphiclib.c -o program -lm -lX11   # compila os arquivos
+$ ./program                                      # executa o programa
 ```
 
 #### Lista mínima de funções para serem implementadas

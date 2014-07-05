@@ -123,25 +123,41 @@ int main(){
 
 		while(menu != 6){
 			//translation option
-			if(menu == 0){
-				
-				printf("\nQual objeto deseja deslocar: ");
-				scanf("%d", &listNum);
-				translate(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
 
-			//matrix generation and printing on screen option
-			} else if(menu == 5){
-				
-				for(j = 0; j < qObject; j++){
-					//calls the function of the list responsible for printing the lines using Bresenham's algorithm
-					printListBresenham(&l[j], image, &viewPortXY, objColor[j]);
-				}
-				//prints the objects with the defined colors
-				drawWindowLine(&viewPortXY, image, lkt);
-			
-			//exiting option
-			} else if(menu == 6){
-				exit(0);
+			switch (menu) {
+				case 0: // deslocamento
+					printf("\nQual objeto deseja deslocar: ");
+					scanf("%d", &listNum);
+					translate(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
+					break;
+
+				case 1: // rotacao
+					printf("função ainda não implementada\n");
+					break;
+
+				case 2: // escalonamento
+					printf("função ainda não implementada\n");
+					break;
+
+				case 3: // cisalhamento
+					printf("função ainda não implementada\n");
+					break;
+
+				case 4: // espelhamento
+					printf("função ainda não implementada\n");
+					break;
+
+				case 5: // exibir a imagem
+					for(j = 0; j < qObject; j++){
+						//calls the function of the list responsible for printing the lines using Bresenham's algorithm
+						printListBresenham(&l[j], image, &viewPortXY, objColor[j]);
+					}
+					//prints the objects with the defined colors
+					drawWindowLine(&viewPortXY, image, lkt);
+					break;
+
+				case 6:
+					exit(0);
 			}
 
 			printf("\e[H\e[2J"); //cleans the unix terminal
