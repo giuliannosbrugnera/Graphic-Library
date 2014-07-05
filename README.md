@@ -13,7 +13,7 @@ $ ./program         # executa o programa
 $ make uninstall    # remove arquivos temporários e o executável
 ```
 
-Alternativamente, você pode utilizar os comandos abaixos.
+Alternativamente, você pode utilizar os comandos abaixo.
 
 ```
 $ gcc main.c graphiclib.c -o program -lm -lX11   # compila os arquivos
