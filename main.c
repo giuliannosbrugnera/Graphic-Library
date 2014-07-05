@@ -23,6 +23,8 @@ int main(){
 	int option; //user decides if wants to work with 2D or 3D dimension
 	int listNum; //user decides which object he/she wants to apply transformations
 	int menu; //stores the menu input by the user
+	list *l;
+	point pt;
 
 	/*-----------------------------------------
 		Look-up table definition

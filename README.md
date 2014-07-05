@@ -11,6 +11,12 @@ $ ./program         # executa o programa
 $ make uninstall    # remove arquivos temporários e o executável
 ```
 
+Alternativamente, você pode compilar usando o comando abaixo.
+
+```
+gcc main.c graphiclib.c -o program -lm -lX11
+```
+
 #### Lista mínima de funções para serem implementadas
 ##### A) Para o caso 2D
 
