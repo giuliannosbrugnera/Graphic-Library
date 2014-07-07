@@ -49,8 +49,8 @@ para a função.
 - [x] 1) uma estrutura para um ponto tridimensional;
 - [x] 2) uma estrutura para uma face do objeto tridimensional;
 - [ ] 3) uma estrutura para um objeto tridimensional;
-- [ ] 4) uma função que dado dois vetores realize o produto vetorial entre eles;
-- [ ] 5) uma função auxiliar para normalizar vetores (lembre-se que a base do observador deve ser ortonormal);
+- [x] 4) uma função que dado dois vetores realize o produto vetorial entre eles;
+- [x] 5) uma função auxiliar para normalizar vetores (lembre-se que a base do observador deve ser ortonormal);
 - [ ] 6) uma função que cria uma face de um objeto tridimensional (corresponde a aresta do objeto 2D);
 - [ ] 7) uma função que realiza uma mudança de base entre bases ortonormais;
 - [ ] 8) uma função que realiza uma projeção perspectiva na forma de uma transformação linear considerando coordenadas homegêneas;

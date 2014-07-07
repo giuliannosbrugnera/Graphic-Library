@@ -812,11 +812,25 @@ void multThreeByThreeMatrix(float first[][3], float second[][3], float result[][
 // Function 4
 // Given two vectors performs the cross product
 // In Computer Graphic, a vector is equals a point
+// NOTE: this function gives a correct answer only when a and b start at the origin point (0,0,0)
 void crossProduct(point3D a, point3D b, point3D *c) {
 
 	c->x = (a.y * b.z) - (a.z * b.y);
 	c->y = (a.z * b.x) - (a.x * b.z);
 	c->z = (a.x * b.y) - (a.y * b.x);
+
+}
+
+// Function 5
+// Implements the normalization of a vector
+void normalizeVector(point3D a, point3D *b) {
+	
+	float length;
+
+	length = sqrt((pow(a.x, 2)) + (pow(a.y, 2)) + (pow(a.z, 2)));
+	b->x = a.x / length;
+	b->y = a.y / length;
+	b->z = a.z / length;
 
 }
 
