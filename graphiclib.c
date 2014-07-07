@@ -821,3 +821,21 @@ void multMatrixArray3D(float *matrix, float *vector, float *result) {
 
 }
 
+// Function number 13
+// Implements the multiplication of two matrix 4x4
+void multFourByFourMatrix(float first[][4], float second[][4], float result[][4]) {
+	
+	int i, j, k;
+	float sum;
+
+	for (i = 0; i <= 3; i++) {
+		for (j = 0; j <= 3; j++) {
+			sum = 0;
+			for (k = 0; k <= 3; k++) {
+				sum = sum + first[i][k] * second[k][j];
+			}
+			result[i][j]=sum;
+		}
+	}
+
+}

@@ -39,7 +39,7 @@ $ ./program                                      # executa o programa
 - [x] 14) funções para a conversão entre os sistemas de cores RGB e HSV e vice-versa;
 - [x] 15) uma função para mapear o SRD no monitor para visualização (deve-se passar o SRD, matriz, e a "look up table");
 - [x] 16) uma função que implementa a multiplicação de uma matriz por um vetor (já considerando coordenadas homogêneas, isto é, matrizes de tamanho 3 x 3 no caso bidimendional);
-- [ ] 17) uma função que implementa a multiplicação de duas matrizes 3 x 3.
+- [x] 17) uma função que implementa a multiplicação de duas matrizes 3 x 3.
 
 Obs: as funções do item 13 podem todas ser simplificadas com o uso da função do item 16, bastando passar a matriz correta
 para a função.
@@ -58,7 +58,7 @@ para a função.
 - [ ] 10) funções que realizam o deslocamento, rotação, escalonamento, cisalhamento e espelhamento na forma de operadores lineares considerando coordenadas homegêneas no espaço tridimensional;
 - [ ] 11) uma função para o algoritmo "z-buffer" (exercício opcional, pois provavelmente não teremos tempo hábil para discutir essa teoria em sala de aula);
 - [x] 12) uma função que implementa a multiplicação de uma matriz por um vetor (já considerando coordenadas homogêneas, isto é, matrizes de tamanho 4 x 4 no caso tridimendional);
-- [ ] 13) uma função que implementa a multiplicação de duas matrizes 4 x 4.
+- [x] 13) uma função que implementa a multiplicação de duas matrizes 4 x 4.
 
 Obs 01: as funções dos itens 7, 8 e 10, podem todas ser implementadas com a função do item 12;
 
