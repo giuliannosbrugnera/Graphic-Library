@@ -71,4 +71,5 @@ uma função que verifique se a nova base é positiva, pois, caso contrário, os
 - [ ] Realizar verificações em geral de tamanhos de janelas;
 - [ ] Estudar e implementar a mudança de base do SRN para o SRD (3D)
 - [x] Função que multiplica uma matriz por um vetor (Retirar os Warnings) 
-- [ ] Função que multiplica duas matrizes (Retirar os Warnings)
+- [x] Função que multiplica duas matrizes (Retirar os Warnings)
+- [ ] Organizar as funções na ordem numérica dada à elas.

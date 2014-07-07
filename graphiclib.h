@@ -112,4 +112,9 @@ void showList3D(face3D *face);
 void setUniverse3D(point3D *minXYZ, point3D *maxXYZ);
 void getUniverse3D(point3D *minXYZ, point3D *maxXYZ);
 
+void multThreeByThreeMatrix(float first[][3], float second[][3], float result[][3]);
+void multMatrixArray3D(float *matrix, float *vector, float *result);
+void multFourByFourMatrix(float first[][4], float second[][4], float result[][4]);
+void crossProduct(point3D a, point3D b, point3D *c);
+
 #endif /* __graphiclib_h__ */

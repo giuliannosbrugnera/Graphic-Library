@@ -809,6 +809,17 @@ void multThreeByThreeMatrix(float first[][3], float second[][3], float result[][
    ---------------------- 3D Universe's Functions ----------------------
    --------------------------------------------------------------------- */
 
+// Function 4
+// Given two vectors performs the cross product
+// In Computer Graphic, a vector is equals a point
+void crossProduct(point3D a, point3D b, point3D *c) {
+
+	c->x = (a.y * b.z) - (a.z * b.y);
+	c->y = (a.z * b.x) - (a.x * b.z);
+	c->z = (a.x * b.y) - (a.y * b.x);
+
+}
+
 // Function 12
 // Implements the multiplication of a matrix by a vector
 void multMatrixArray3D(float *matrix, float *vector, float *result) {
