@@ -785,3 +785,39 @@ void hsvTorgb(HSV hsv, RGB *rgb) {
 		}
 	}
 }
+
+// Function number 17
+// Implements the multiplication of two matrix 3x3
+void multThreeByThreeMatrix(float first[][3], float second[][3], float result[][3]) {
+	
+	int i, j, k;
+	float sum;
+
+	for (i = 0; i <= 2; i++) {
+		for (j = 0; j <= 2; j++) {
+			sum = 0;
+			for (k = 0; k <= 2; k++) {
+				sum = sum + first[i][k] * second[k][j];
+			}
+			result[i][j]=sum;
+		}
+	}
+
+}
+
+/* ---------------------------------------------------------------------
+   ---------------------- 3D Universe's Functions ----------------------
+   --------------------------------------------------------------------- */
+
+// Function 12
+// Implements the multiplication of a matrix by a vector
+void multMatrixArray3D(float *matrix, float *vector, float *result) {
+	
+	//multiplicating the matrix by the vector
+	result[0] = (matrix[0] * vector[0]) + (matrix[1]  * vector[1]) + (matrix[2]  * vector[2]);
+	result[1] = (matrix[3] * vector[0]) + (matrix[4]  * vector[1]) + (matrix[5]  * vector[2]);
+	result[2] = (matrix[6] * vector[0]) + (matrix[7]  * vector[1]) + (matrix[8]  * vector[2]);
+	result[3] = (matrix[9] * vector[0]) + (matrix[10] * vector[1]) + (matrix[11] * vector[2]);
+
+}
+
