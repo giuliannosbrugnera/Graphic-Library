@@ -28,8 +28,8 @@ int main(){
 		Look-up table definition
 		-----------------------------------------*/
 		lookup lkt[6];
-		lkt[0].colors.r = 0; lkt[0].colors.g = 0; lkt[0].colors.b = 0;
-		lkt[1].colors.r = 1; lkt[2].colors.g = 1; lkt[2].colors.b = 1;
+		lkt[0].colors.r = 1; lkt[0].colors.g = 1; lkt[0].colors.b = 1;
+		lkt[1].colors.r = 0; lkt[2].colors.g = 0; lkt[2].colors.b = 0;
 		lkt[2].colors.r = 1; lkt[3].colors.g = 1; lkt[3].colors.b = 0;
 		lkt[3].colors.r = 1; lkt[4].colors.g = 0; lkt[4].colors.b = 0;
 		lkt[4].colors.r = 0; lkt[5].colors.g = 1; lkt[5].colors.b = 0;
@@ -54,7 +54,7 @@ int main(){
 		-----------------------------------------*/
 
 		setUniverse(&minXY, &maxXY); //setting universe values
-		getUniverse(&minXY, &maxXY); //getting universe values
+		//getUniverse(&minXY, &maxXY); //getting universe values
 
 		setViewPort(&viewPortXY); //setting the view port size according to user input
 		//getViewPort(&viewPortXY); //getting the view port dimensions
@@ -123,26 +123,34 @@ int main(){
 			//translation option
 
 			switch (menu) {
-				case 0: // deslocamento
+				case 0: // translate
 					printf("\nQual objeto deseja deslocar: ");
 					scanf("%d", &listNum);
 					translate(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
 					break;
 
-				case 1: // rotacao
-					printf("função ainda não implementada\n");
+				case 1: // rotate
+					printf("\nQual objeto deseja rotacionar: ");
+					scanf("%d", &listNum);
+					rotate(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
 					break;
 
-				case 2: // escalonamento
-					printf("função ainda não implementada\n");
+				case 2: // scaling
+					printf("\nQual objeto deseja escalonar: ");
+					scanf("%d", &listNum);
+					scale(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
 					break;
 
-				case 3: // cisalhamento
-					printf("função ainda não implementada\n");
+				case 3: // shearing
+					printf("\nQual objeto deseja cisalhar: ");
+					scanf("%d", &listNum);
+					shearing(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
 					break;
 
-				case 4: // espelhamento
-					printf("função ainda não implementada\n");
+				case 4: // mirror
+					printf("\nQual objeto deseja espelhar: ");
+					scanf("%d", &listNum);
+					mirror(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
 					break;
 
 				case 5: // exibir a imagem
