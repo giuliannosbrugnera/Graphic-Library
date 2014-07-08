@@ -882,10 +882,10 @@ void normalizeVector(point3D a, point3D *b) {
 void multMatrixArray3D(float *matrix, float *vector, float *result) {
 	
 	//multiplicating the matrix by the vector
-	result[0] = (matrix[0] * vector[0]) + (matrix[1]  * vector[1]) + (matrix[2]  * vector[2]);
-	result[1] = (matrix[3] * vector[0]) + (matrix[4]  * vector[1]) + (matrix[5]  * vector[2]);
-	result[2] = (matrix[6] * vector[0]) + (matrix[7]  * vector[1]) + (matrix[8]  * vector[2]);
-	result[3] = (matrix[9] * vector[0]) + (matrix[10] * vector[1]) + (matrix[11] * vector[2]);
+	result[0] = (matrix[0]  * vector[0]) + (matrix[1]  * vector[1]) + (matrix[2]   * vector[2]) + (matrix[3]  * vector[3]);
+	result[1] = (matrix[4]  * vector[0]) + (matrix[5]  * vector[1]) + (matrix[6]   * vector[2]) + (matrix[7]  * vector[3]);
+	result[2] = (matrix[8]  * vector[0]) + (matrix[9]  * vector[1]) + (matrix[10]  * vector[2]) + (matrix[11] * vector[3]);
+	result[3] = (matrix[12] * vector[0]) + (matrix[13] * vector[1]) + (matrix[14]  * vector[2]) + (matrix[15] * vector[3]);
 
 }
 
