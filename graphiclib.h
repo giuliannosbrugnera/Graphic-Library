@@ -92,10 +92,10 @@ void bresenham(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY, int 
 void multMatrixArray(float *matrix, float *vector, float *result);
 
 void translate(list *p_L, point *minXY, point *maxXY, point *viewPortXY);
-//void translate(list *p_l);
-//void rotate(list *p_l);
-//void scale(list *p_l);
-//void mirror(list *p_l);
+void scale(list *p_L, point *minXY, point *maxXY, point *viewPortXY);
+void rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY);
+void mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY);
+void shearing(list *p_L, point *minXY, point *maxXY, point *viewPortXY);
 
 void drawWindow(point *viewPortXY);
 void drawWindowLine(point *viewPortXY, int *input, lookup *lkt);

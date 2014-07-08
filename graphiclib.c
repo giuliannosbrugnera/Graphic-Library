@@ -409,9 +409,9 @@ void translate(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 
 	auxNode = *p_L;
 
-	printf("Quantidade a ser transladada em relacao ao eixo X do universo: ");
+	printf("Quantidade a ser deslocada em relacao ao eixo X do universo: ");
 	scanf("%d", &dx);
-	printf("Quantidade a ser transladada em relacao ao eixo Y do universo: ");
+	printf("Quantidade a ser deslocada em relacao ao eixo Y do universo: ");
 	scanf("%d", &dy);
 
 	//translation matrix declaration
@@ -440,135 +440,178 @@ void translate(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 	}
 }
 
-/*void translate(list *p_l) {
-	node *auxNode;
-	auxNode = *p_l;
-	float  t[3][3];
-	int pi[3][1], p[3], dx, dy;
+void scale(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
+	int sx, sy; //variables that stores the scale
+	node *auxNode; //points to the object that will be translated
+	point pt, ptN; //auxiliar points
 
-	printf("Entre com o deslocamento em X e Y respectivamente: ");
-	scanf("%d", &dx);
-	scanf("%d", &dy);
+	auxNode = *p_L;
 
-	t[0][0]= 1;	t[0][1]= 0;	t[0][2]= dx;
-	t[1][0]= 0;	t[1][1]= 1;	t[1][2]= dy;
-	t[2][0]= 0;	t[2][1]= 0;	t[2][2]= 1;
+	printf("Quantidade a ser escalonada em relacao ao eixo X do universo: ");
+	scanf("%d", &sx);
+	printf("Quantidade a ser escalonada em relacao ao eixo Y do universo: ");
+	scanf("%d", &sy);
+
+	//scaling matrix declaration
+	float scaleMatrix[9] = {sx, 0, 0, 0, sy, 0, 0, 0, 1};
+	//point vector and result array declaration
+	float p[3], result[3];
 
 	while(auxNode != NULL){
-		pi[0][0] = (int)auxNode->ptListD.x;
-		pi[1][0] = (int)auxNode->ptListD.y;
-		pi[2][0] = 1;
 
-		p[0] = 0;
-		p[1] = 0;
-		p[2] = 0;
+		p[0] = auxNode->ptList.x;
+		p[1] = auxNode->ptList.y;
+		p[2] = 1;
 
-		multMatrix(t, pi, &p);
+		multMatrixArray(scaleMatrix, p, result);
 
-		auxNode->ptListD.x = (int)p[0];
-		auxNode->ptListD.y = (int)p[1];
+		//updating the point values
+		auxNode->ptList.x = pt.x = result[0];
+		auxNode->ptList.y = pt.y = result[1];
+
+		//converts the translated point to srn
+		auxNode->ptListN = ptN = sruToSrn(&pt, maxXY, minXY);
+		//converts the translated point to srd
+		auxNode->ptListD = srnToSrd(&ptN, viewPortXY);
 
 		auxNode = auxNode->next;
 	}
 }
 
-void rotate(list *p_l) {
-	node *auxNode;
-	auxNode = *p_l;
-	float t[3][3];
-	int pi[3][1], p[3], teta;
+void rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
+	float a; //variable that store the angle
+	node *auxNode; //points to the object that will be translated
+	point pt, ptN; //auxiliar points
 
-	printf("Entre com o angulo de rotacao: ");
-	scanf("%d", &teta);
+	auxNode = *p_L;
 
-	printf("%d\n", (int)cos(teta) );
+	printf("Em quantos graus deseja rotacionar a imagem: ");
+	scanf("%f", &a);
 
-	t[0][0]= (float)cos(teta);	t[0][1]= (float)-sin(teta); t[0][2]= 0;
-	t[1][0]= (float)sin(teta);	t[1][1]= (float)cos(teta);  t[1][2]= 0;
-	t[2][0]= 0;					t[2][1]= 0;			 	 	t[2][2]= 1;
-
-
+	//rotation matrix declaration
+	float rotateMatrix[9] = {cos(a), -sin(a), 0, sin(a), cos(a), 0, 0, 0, 1};
+	//point vector and result array declaration
+	float p[3], result[3];
 
 	while(auxNode != NULL){
-		pi[0][0] = (int)auxNode->ptListD.x;
-		pi[1][0] = (int)auxNode->ptListD.y;
-		pi[2][0] = 1;
 
-		p[0] = 0;
-		p[1] = 0;
-		p[2] = 0;
+		p[0] = auxNode->ptList.x;
+		p[1] = auxNode->ptList.y;
+		p[2] = 1;
 
-		multMatrix(t, pi, &p);
+		multMatrixArray(rotateMatrix, p, result);
 
-		auxNode->ptListD.x = (int)p[0];
-		auxNode->ptListD.y = (int)p[1];
+		//updating the point values
+		auxNode->ptList.x = pt.x = result[0];
+		auxNode->ptList.y = pt.y = result[1];
+
+		//converts the translated point to srn
+		auxNode->ptListN = ptN = sruToSrn(&pt, maxXY, minXY);
+		//converts the translated point to srd
+		auxNode->ptListD = srnToSrd(&ptN, viewPortXY);
 
 		auxNode = auxNode->next;
 	}
 }
 
-void scale(list *p_l) {
-	node *auxNode;
-	auxNode = *p_l;
-	float t[3][3], escx, escy;
-	int pi[3][1], p[3];
+void mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
+	int a; //variable that store the mirror option
+	node *auxNode; //points to the object that will be translated
+	point pt, ptN; //auxiliar points
 
-	printf("Entre com a escala em x e y respectivamente: ");
-	scanf("%f %f", &escx, &escy);
+	auxNode = *p_L;
 
-	t[0][0]= escx;	t[0][1]= 0; 	t[0][2]= 0;
-	t[1][0]= 0;		t[1][1]= escy;  t[1][2]= 0;
-	t[2][0]= 0;		t[2][1]= 0;		t[2][2]= 1;
+	printf("Em relacao a qual eixo deseja espelhar a imagem:\n\n");
+	printf("- [0] Eixo X;\n");
+	printf("- [1] Eixo Y;\n");
+	printf("- [2] Ambos;\n");
+	printf("\n-> ");
+	scanf("%d", &a);
 
-
+	//mirror matrix declaration
+	float mirrorMatrixX[9] = {1, 0, 0, 0, -1, 0, 0, 0, 1};
+	float mirrorMatrixY[9] = {-1, 0, 0, 0, 1, 0, 0, 0, 1};
+	float mirrorMatrixXY[9] = {-1, 0, 0, 0, -1, 0, 0, 0, 1};
+	
+	//point vector and result array declaration
+	float p[3], result[3];
 
 	while(auxNode != NULL){
-		pi[0][0] = (int)auxNode->ptListD.x;
-		pi[1][0] = (int)auxNode->ptListD.y;
-		pi[2][0] = 1;
 
-		p[0] = 0;
-		p[1] = 0;
-		p[2] = 0;
+		p[0] = auxNode->ptList.x;
+		p[1] = auxNode->ptList.y;
+		p[2] = 1;
 
-		multMatrix(t, pi, &p);
+		if(a == 0)
+			multMatrixArray(mirrorMatrixX, p, result);
+		if(a == 1)
+			multMatrixArray(mirrorMatrixY, p, result);
+		if(a == 2)
+			multMatrixArray(mirrorMatrixXY, p, result);	
 
-		auxNode->ptListD.x = (int)p[0];
-		auxNode->ptListD.y = (int)p[1];
+		//updating the point values
+		auxNode->ptList.x = pt.x = result[0];
+		auxNode->ptList.y = pt.y = result[1];
+
+		//converts the translated point to srn
+		auxNode->ptListN = ptN = sruToSrn(&pt, maxXY, minXY);
+		//converts the translated point to srd
+		auxNode->ptListD = srnToSrd(&ptN, viewPortXY);
 
 		auxNode = auxNode->next;
 	}
 }
 
-void mirror(list *p_l) {
-	node *auxNode;
-	auxNode = *p_l;
-	float t[3][3], escx, escy;
-	int pi[3][1], p[3];
+void shearing(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
+	int a; //variable that store the shearing option
+	float shx, shy; //variables that stores the shearing values
+	node *auxNode; //points to the object that will be translated
+	point pt, ptN; //auxiliar points
 
-	t[0][0]= 1;		t[0][1]= 0; 	t[0][2]= 0;
-	t[1][0]= 0;		t[1][1]= -1;    t[1][2]= 0;
-	t[2][0]= 0;		t[2][1]= 0;		t[2][2]= 1;
+	auxNode = *p_L;
 
+	printf("Em relacao a qual eixo deseja aplicar o cisalhamento:\n\n");
+	printf("- [0] Eixo X;\n");
+	printf("- [1] Eixo Y;\n");
+	printf("\n-> ");
+	scanf("%d", &a);
 
+	printf("\nQuantidade a ser cisalhada: ");
+	if(a == 0)
+		scanf("%f", &shx);
+	if(a == 1)
+		scanf("%f", &shy);
+
+	//shearing matrix declaration
+	float shearMatrixX[9] = {1, shx, 0, 0, 1, 0, 0, 0, 1};
+	float shearMatrixY[9] = {1, 0, 0, shy, 1, 0, 0, 0, 1};
+
+	//point vector and result array declaration
+	float p[3], result[3];
 
 	while(auxNode != NULL){
-		pi[0][0] = (int)auxNode->ptListD.x;
-		pi[1][0] = (int)auxNode->ptListD.y;
-		pi[2][0] = 1;
 
-		p[0] = 0;
-		p[1] = 0;
-		p[2] = 0;
+		p[0] = auxNode->ptList.x;
+		p[1] = auxNode->ptList.y;
+		p[2] = 1;
 
-		multMatrix(t, pi, &p);
+		if(a == 0)
+			multMatrixArray(shearMatrixX, p, result);
+		if(a == 1)
+			multMatrixArray(shearMatrixY, p, result);
 
-		auxNode->ptListD.x = (int)p[0];
-		auxNode->ptListD.y = (int)p[1];
+		//updating the point values
+		auxNode->ptList.x = pt.x = result[0];
+		auxNode->ptList.y = pt.y = result[1];
+
+		//converts the translated point to srn
+		auxNode->ptListN = ptN = sruToSrn(&pt, maxXY, minXY);
+		//converts the translated point to srd
+		auxNode->ptListD = srnToSrd(&ptN, viewPortXY);
 
 		auxNode = auxNode->next;
 	}
-}*/
+}
 
 /*--------------------------------------------------------------------------------------------*/
 void drawWindow(point *viewPortXY){
