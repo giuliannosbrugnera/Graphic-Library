@@ -10,25 +10,6 @@
 /*Functions*/
 
 /*--------------------------------------------------------------------------------------------*/
-/*void multMatrix(float matrizA[][3], int matrizB[][1], int* matrizC){
-
-	int i, j, x, Aux = 0;
-
-	//multiplica matrizes
-	for(i=0; i<3; i++) {
-		for(j=0; j<1; j++){
-			matrizC[i]=0;
-		    for(x=0; x<3; x++){
-		    	Aux = Aux + (int)(matrizA[i][x]*matrizB[x][j]);
-		    }
-		    matrizC[i]=Aux;
-		    Aux=0;
-		}
-		printf("%d\n", matrizC[i]);
-	}
-
-}*/
-
 int startList(list *p_l){
 	*p_l = NULL;
 }
@@ -148,6 +129,45 @@ void showList3D(face3D *face){
 	}
 
 	printf("\n");
+}
+
+point middleObject(list *p_L){
+	point ptMiddle, ptMax, ptMin;
+	node *auxNode;
+	auxNode = *p_L;
+
+	if(auxNode != NULL){
+		ptMin.x = auxNode->ptListD.x;
+		ptMin.y = auxNode->ptListD.y;
+		ptMax.x = auxNode->ptListD.x;
+		ptMin.y = auxNode->ptListD.y;
+	}
+
+	while(auxNode != NULL){
+		
+		//obtaining the minimum points
+		if(auxNode->ptListD.x < ptMin.x)
+			ptMin.x = auxNode->ptListD.x;
+		if(auxNode->ptListD.y < ptMin.y)
+			ptMin.y = auxNode->ptListD.y;
+
+		//obtaining the maximum points
+		if(auxNode->ptListD.x > ptMax.x)
+			ptMax.x = auxNode->ptListD.x;
+		if(auxNode->ptListD.y > ptMax.y)
+			ptMax.y = auxNode->ptListD.y;
+
+		//iterates the points list
+		auxNode = auxNode->next;
+	}
+
+	//calculates the middle point
+	ptMiddle.x = ((ptMax.x - ptMin.x)/2) + ptMin.x;
+	ptMiddle.y = ((ptMax.y - ptMin.y)/2) + ptMin.y;
+
+	printf("\nMiddle point [%0.f][%0.f]\n\n", ptMiddle.x, ptMiddle.y);
+
+	return ptMiddle;
 }
 
 void printListBresenham(list *p_l, int *input, point *viewPortXY, int color){
@@ -329,66 +349,6 @@ void drawLine(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY){
 }
 
 void bresenham(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY, int color){
-	// int i = 0, j = 0, ystep = 0, steep = 0;
-	// float x0 = 0, x1 = 0, y0 = 0, y1 = 0, aux = 0;
-
-	// x0 = ptOneD->x;
-	// y0 = ptOneD->y;
-	// x1 = ptTwoD->x;
-	// y1 = ptTwoD->y;
-
-	
-	// if(abs(y1 - y0) > abs(x1 - x0)){
-	// 	steep = 1;
-	// 	aux = x0; x0 = y0; y0 = aux; 
-	// 	aux = x1; x1 =  y1; y1 = aux;
-	// }
-
-	// if(x0 > x1){
-	// 	aux = x0; x0 = x1; x1 = aux;
-	// 	aux = y0; y0 = y1; y1 = aux;
-	// }
-
-	// char image[(int)viewPortXY->x][(int)viewPortXY->y];
-
-	// //decoding the vector of int to a matrix to simplify the understanding of attributions
-	// for(i = 0; i < viewPortXY->x; i++){
-	// 	for(j = 0; j < viewPortXY->y; j++){
-	// 		image[i][j] = input[(i * (int)viewPortXY->y + j)];
-	// 	}
-	// }
-
-	// int deltax = x1 - x0;
-	// int deltay = abs(y1 - y0);
-	// int error = deltax/2;
-	// int y = y0, x;
-
-	// if(y0 < y1){
-	// 	ystep = 1;
-	// } else {
-	// 	ystep = -1;
-	// }
-
-	// //defines the line that will be printed later
-	// for(x = x0; x < x1; x++){
-	// 	if(steep){
-	// 		image[y][x] = color;
-	// 	} else {
-	// 		image[x][y] = color;
-	// 	}
-	// 	error = error - deltay;
-	// 	if(error < 0){
-	// 		y = y + ystep;
-	// 		error = error + deltax;
-	// 	}
-	// }
-
-	// //copying back the matrix to the vector of int
-	// for(i = 0; i < viewPortXY->x; i++){
-	// 	for(j = 0; j < viewPortXY->y; j++){
-	// 		input[(i * (int)viewPortXY->y) + j] = image[i][j];
-	// 	}
-	// }
 
 	int dx, dy; 
     int sx, sy; 
