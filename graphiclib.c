@@ -431,9 +431,14 @@ void translate(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int dx,
 void scale(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 	int sx, sy; //variables that stores the scale
 	node *auxNode; //points to the object that will be translated
-	point pt, ptN; //auxiliar points
+	point pt, ptN, ptMiddle; //auxiliar points
 
 	auxNode = *p_L;
+
+	//firts of all calculates the image middle point
+	ptMiddle = middleObject(p_L);
+	//translates the object to the origin using the given middle point
+	translate(p_L, minXY, maxXY, viewPortXY, -(ptMiddle.x), -(ptMiddle.y));
 
 	printf("Quantidade a ser escalonada em relacao ao eixo X do universo: ");
 	scanf("%d", &sx);
@@ -464,6 +469,9 @@ void scale(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 
 		auxNode = auxNode->next;
 	}
+
+	//translates the object to the original point given the middle of it
+	translate(p_L, minXY, maxXY, viewPortXY, ptMiddle.x, ptMiddle.y);
 }
 
 void rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
@@ -513,9 +521,14 @@ void rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 void mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 	int a; //variable that store the mirror option
 	node *auxNode; //points to the object that will be translated
-	point pt, ptN; //auxiliar points
+	point pt, ptN, ptMiddle; //auxiliar points
 
 	auxNode = *p_L;
+
+	//firts of all calculates the image middle point
+	ptMiddle = middleObject(p_L);
+	//translates the object to the origin using the given middle point
+	translate(p_L, minXY, maxXY, viewPortXY, -(ptMiddle.x), -(ptMiddle.y));
 
 	printf("Em relacao a qual eixo deseja espelhar a imagem:\n\n");
 	printf("- [0] Eixo X;\n");
@@ -556,15 +569,23 @@ void mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 
 		auxNode = auxNode->next;
 	}
+
+	//translates the object to the original point given the middle of it
+	translate(p_L, minXY, maxXY, viewPortXY, ptMiddle.x, ptMiddle.y);
 }
 
 void shearing(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 	int a; //variable that store the shearing option
 	float shx, shy; //variables that stores the shearing values
 	node *auxNode; //points to the object that will be translated
-	point pt, ptN; //auxiliar points
+	point pt, ptN, ptMiddle; //auxiliar points
 
 	auxNode = *p_L;
+
+	//firts of all calculates the image middle point
+	ptMiddle = middleObject(p_L);
+	//translates the object to the origin using the given middle point
+	translate(p_L, minXY, maxXY, viewPortXY, -(ptMiddle.x), -(ptMiddle.y));
 
 	printf("Em relacao a qual eixo deseja aplicar o cisalhamento:\n\n");
 	printf("- [0] Eixo X;\n");
@@ -607,6 +628,9 @@ void shearing(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 
 		auxNode = auxNode->next;
 	}
+
+	//translates the object to the original point given the middle of it
+	translate(p_L, minXY, maxXY, viewPortXY, ptMiddle.x, ptMiddle.y);
 }
 
 /*--------------------------------------------------------------------------------------------*/
