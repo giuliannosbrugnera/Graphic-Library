@@ -412,7 +412,7 @@ void bresenham(int *input, point *ptOneD, point *ptTwoD, point *viewPortXY, int 
 
     while(1){
         if(!(p1x > WIDTH || p1y > HEIGHT || p1x <= 0 || p1y <= 0)){
-            input[(p1y)*WIDTH+p1x] = color;
+            input[p1y*HEIGHT+p1x] = color;
         }
         if(p1x == p2x && p1y == p2y) 
             break;
@@ -755,9 +755,9 @@ void drawWindowLine(point *viewPortXY, int *input, lookup *lkt){
 
 	    for(m=0;m<height;m++) {
 	      for(n=0;n<width;n++) {
-	        ximage -> data[(m*4)*width+n*4] = (char) round((lkt[image[height-m-1][n]].colors.r)*255);
-	        ximage -> data[(m*4)*width+n*4+1] = (char) round((lkt[image[height-m-1][n]].colors.g)*255);
-	        ximage -> data[(m*4)*width+n*4+2] = (char) round((lkt[image[height-m-1][n]].colors.b)*255);
+	        ximage -> data[(m*4)*width+n*4] = (char) round((lkt[image[m][n]].colors.r)*255);
+	        ximage -> data[(m*4)*width+n*4+1] = (char) round((lkt[image[m][n]].colors.g)*255);
+	        ximage -> data[(m*4)*width+n*4+2] = (char) round((lkt[image[m][n]].colors.b)*255);
 	        ximage -> data[(m*4)*width+n*4+3] = (char) 0;
 	        }
 	    }
