@@ -137,25 +137,25 @@ point middleObject(list *p_L){
 	auxNode = *p_L;
 
 	if(auxNode != NULL){
-		ptMin.x = auxNode->ptListD.x;
-		ptMin.y = auxNode->ptListD.y;
-		ptMax.x = auxNode->ptListD.x;
-		ptMin.y = auxNode->ptListD.y;
+		ptMin.x = auxNode->ptList.x;
+		ptMin.y = auxNode->ptList.y;
+		ptMax.x = auxNode->ptList.x;
+		ptMin.y = auxNode->ptList.y;
 	}
 
 	while(auxNode != NULL){
 		
 		//obtaining the minimum points
-		if(auxNode->ptListD.x < ptMin.x)
-			ptMin.x = auxNode->ptListD.x;
-		if(auxNode->ptListD.y < ptMin.y)
-			ptMin.y = auxNode->ptListD.y;
+		if(auxNode->ptList.x < ptMin.x)
+			ptMin.x = auxNode->ptList.x;
+		if(auxNode->ptList.y < ptMin.y)
+			ptMin.y = auxNode->ptList.y;
 
 		//obtaining the maximum points
-		if(auxNode->ptListD.x > ptMax.x)
-			ptMax.x = auxNode->ptListD.x;
-		if(auxNode->ptListD.y > ptMax.y)
-			ptMax.y = auxNode->ptListD.y;
+		if(auxNode->ptList.x > ptMax.x)
+			ptMax.x = auxNode->ptList.x;
+		if(auxNode->ptList.y > ptMax.y)
+			ptMax.y = auxNode->ptList.y;
 
 		//iterates the points list
 		auxNode = auxNode->next;
@@ -164,8 +164,6 @@ point middleObject(list *p_L){
 	//calculates the middle point
 	ptMiddle.x = ((ptMax.x - ptMin.x)/2) + ptMin.x;
 	ptMiddle.y = ((ptMax.y - ptMin.y)/2) + ptMin.y;
-
-	printf("\nMiddle point [%0.f][%0.f]\n\n", ptMiddle.x, ptMiddle.y);
 
 	return ptMiddle;
 }
@@ -399,18 +397,11 @@ void multMatrixArray(float *matrix, float *vector, float *result){
 
 }
 
-void translate(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
-	int dx, dy; //variables that stores the displacements
+void translate(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int dx, int dy){
 	node *auxNode; //points to the object that will be translated
 	point pt, ptN; //auxiliar points
 
 	auxNode = *p_L;
-
-	printf("Quantidade a ser deslocada em relacao ao eixo X do universo: ");
-	scanf("%d", &dx);
-	printf("Quantidade a ser deslocada em relacao ao eixo Y do universo: ");
-	scanf("%d", &dy);
-
 	//translation matrix declaration
 	float transMatrix[9] = {1, 0, dx, 0, 1, dy, 0, 0, 1};
 	//point vector and result array declaration
@@ -478,9 +469,14 @@ void scale(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 void rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 	float a; //variable that store the angle
 	node *auxNode; //points to the object that will be translated
-	point pt, ptN; //auxiliar points
+	point pt, ptN, ptMiddle; //auxiliar points
 
 	auxNode = *p_L;
+
+	//firts of all calculates the image middle point
+	ptMiddle = middleObject(p_L);
+	//translates the object to the origin using the given middle point
+	translate(p_L, minXY, maxXY, viewPortXY, -(ptMiddle.x), -(ptMiddle.y));
 
 	printf("Em quantos graus deseja rotacionar a imagem: ");
 	scanf("%f", &a);
@@ -502,13 +498,16 @@ void rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 		auxNode->ptList.x = pt.x = result[0];
 		auxNode->ptList.y = pt.y = result[1];
 
-		//converts the translated point to srn
+		//converts the rotated point to srn
 		auxNode->ptListN = ptN = sruToSrn(&pt, maxXY, minXY);
-		//converts the translated point to srd
+		//converts the rotated point to srd
 		auxNode->ptListD = srnToSrd(&ptN, viewPortXY);
 
 		auxNode = auxNode->next;
 	}
+
+	//translates the object to the original point given the middle of it
+	translate(p_L, minXY, maxXY, viewPortXY, ptMiddle.x, ptMiddle.y);
 }
 
 void mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY){

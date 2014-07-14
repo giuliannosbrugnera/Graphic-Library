@@ -93,7 +93,7 @@ void multMatrixArray(float *matrix, float *vector, float *result);
 
 point middleObject(list *p_L);
 
-void translate(list *p_L, point *minXY, point *maxXY, point *viewPortXY);
+void translate(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int dx, int dy);
 void scale(list *p_L, point *minXY, point *maxXY, point *viewPortXY);
 void rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY);
 void mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY);

@@ -23,6 +23,7 @@ int main(){
 	int option; //user decides if wants to work with 2D or 3D dimension
 	int listNum; //user decides which object he/she wants to apply transformations
 	int menu; //stores the menu input by the user
+	int dx, dy; //variables that stores the translations (used in option 0 of 2D menu)
 
 	/*-----------------------------------------
 		Look-up table definition
@@ -126,10 +127,12 @@ int main(){
 				case 0: // translate
 					printf("\nQual objeto deseja deslocar: ");
 					scanf("%d", &listNum);
-					translate(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
+					printf("Quantidade a ser deslocada em relacao ao eixo X do universo: ");
+					scanf("%d", &dx);
+					printf("Quantidade a ser deslocada em relacao ao eixo Y do universo: ");
+					scanf("%d", &dy);
 
-					middleObject(&l[listNum-1]);
-
+					translate(&l[listNum-1], &minXY, &maxXY, &viewPortXY, dx, dy);
 					break;
 
 				case 1: // rotate
