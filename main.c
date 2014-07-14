@@ -127,6 +127,9 @@ int main(){
 					printf("\nQual objeto deseja deslocar: ");
 					scanf("%d", &listNum);
 					translate(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
+
+					middleObject(&l[listNum-1]);
+
 					break;
 
 				case 1: // rotate
