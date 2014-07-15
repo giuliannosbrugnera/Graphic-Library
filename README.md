@@ -48,12 +48,12 @@ para a função.
 
 - [x] 1) uma estrutura para um ponto tridimensional;
 - [x] 2) uma estrutura para uma face do objeto tridimensional;
-- [ ] 3) uma estrutura para um objeto tridimensional;
+- [x] 3) uma estrutura para um objeto tridimensional;
 - [x] 4) uma função que dado dois vetores realize o produto vetorial entre eles;
 - [x] 5) uma função auxiliar para normalizar vetores (lembre-se que a base do observador deve ser ortonormal);
-- [ ] 6) uma função que cria uma face de um objeto tridimensional (corresponde a aresta do objeto 2D);
-- [ ] 7) uma função que realiza uma mudança de base entre bases ortonormais;
-- [ ] 8) uma função que realiza uma projeção perspectiva na forma de uma transformação linear considerando coordenadas homegêneas;
+- [x] 6) uma função que cria uma face de um objeto tridimensional (corresponde a aresta do objeto 2D);
+- [x] 7) uma função que realiza uma mudança de base entre bases ortonormais;
+- [x] 8) uma função que realiza uma projeção perspectiva na forma de uma transformação linear considerando coordenadas homegêneas;
 - [ ] 9) uma função que implementa uma curva de Bèzier ou uma função que implementa uma B-Spline (escolha uma!);
 - [ ] 10) funções que realizam o deslocamento, rotação, escalonamento, cisalhamento e espelhamento na forma de operadores lineares considerando coordenadas homegêneas no espaço tridimensional;
 - [ ] 11) uma função para o algoritmo "z-buffer" (exercício opcional, pois provavelmente não teremos tempo hábil para discutir essa teoria em sala de aula);
