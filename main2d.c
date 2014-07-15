@@ -109,10 +109,6 @@ int main(){
 
 	//declaração de variáveis
 	int i, j; 								//contadores
-	int dx, dy; 							//variáveis usadas para operação de translação
-	int sx, sy; 							//variáveis usadas para operação de escalamento
-	int a; 									//variável usada para armazenar o ângulo da operação de rotação
-	float shx, shy; 						//variáveis usadas para operação de cisalhamento
 	point  minXY, maxXY, viewPortXY, pt;	//mínimo e máximo do universo e dimensão da viewport
 
 	//definição da quantidade de objetos
