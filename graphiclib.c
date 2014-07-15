@@ -1,4 +1,5 @@
-/*Daniel Ramos Miola 438340
+/*GRUPO 6
+  Daniel Ramos Miola 438340
   Giulianno Raphael Sbrugnera 408093
   Igor Felipe Ferreira Ceridório 408611
   Rafael Paschoal Giordano 408298*/
@@ -428,8 +429,7 @@ void translate(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int dx,
 	}
 }
 
-void scale(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
-	int sx, sy; //variables that stores the scale
+void scale(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int sx, int sy){
 	node *auxNode; //points to the object that will be translated
 	point pt, ptN, ptMiddle; //auxiliar points
 
@@ -439,11 +439,6 @@ void scale(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 	ptMiddle = middleObject(p_L);
 	//translates the object to the origin using the given middle point
 	translate(p_L, minXY, maxXY, viewPortXY, -(ptMiddle.x), -(ptMiddle.y));
-
-	printf("Quantidade a ser escalonada em relacao ao eixo X do universo: ");
-	scanf("%d", &sx);
-	printf("Quantidade a ser escalonada em relacao ao eixo Y do universo: ");
-	scanf("%d", &sy);
 
 	//scaling matrix declaration
 	float scaleMatrix[9] = {sx, 0, 0, 0, sy, 0, 0, 0, 1};
@@ -474,8 +469,7 @@ void scale(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 	translate(p_L, minXY, maxXY, viewPortXY, ptMiddle.x, ptMiddle.y);
 }
 
-void rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
-	float a; //variable that store the angle
+void rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int a){
 	node *auxNode; //points to the object that will be translated
 	point pt, ptN, ptMiddle; //auxiliar points
 
@@ -484,10 +478,7 @@ void rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 	//firts of all calculates the image middle point
 	ptMiddle = middleObject(p_L);
 	//translates the object to the origin using the given middle point
-	translate(p_L, minXY, maxXY, viewPortXY, -(ptMiddle.x), -(ptMiddle.y));
-
-	printf("Em quantos graus deseja rotacionar a imagem: ");
-	scanf("%f", &a);
+	translate(p_L, minXY, maxXY, viewPortXY, -(ptMiddle.x), -(ptMiddle.y));	
 
 	//rotation matrix declaration
 	float rotateMatrix[9] = {cos(a), -sin(a), 0, sin(a), cos(a), 0, 0, 0, 1};
@@ -518,8 +509,7 @@ void rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 	translate(p_L, minXY, maxXY, viewPortXY, ptMiddle.x, ptMiddle.y);
 }
 
-void mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
-	int a; //variable that store the mirror option
+void mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int mOpt){
 	node *auxNode; //points to the object that will be translated
 	point pt, ptN, ptMiddle; //auxiliar points
 
@@ -529,13 +519,6 @@ void mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 	ptMiddle = middleObject(p_L);
 	//translates the object to the origin using the given middle point
 	translate(p_L, minXY, maxXY, viewPortXY, -(ptMiddle.x), -(ptMiddle.y));
-
-	printf("Em relacao a qual eixo deseja espelhar a imagem:\n\n");
-	printf("- [0] Eixo X;\n");
-	printf("- [1] Eixo Y;\n");
-	printf("- [2] Ambos;\n");
-	printf("\n-> ");
-	scanf("%d", &a);
 
 	//mirror matrix declaration
 	float mirrorMatrixX[9] = {1, 0, 0, 0, -1, 0, 0, 0, 1};
@@ -551,11 +534,11 @@ void mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 		p[1] = auxNode->ptList.y;
 		p[2] = 1;
 
-		if(a == 0)
+		if(mOpt == 0)
 			multMatrixArray(mirrorMatrixX, p, result);
-		if(a == 1)
+		if(mOpt == 1)
 			multMatrixArray(mirrorMatrixY, p, result);
-		if(a == 2)
+		if(mOpt == 2)
 			multMatrixArray(mirrorMatrixXY, p, result);	
 
 		//updating the point values
@@ -574,9 +557,7 @@ void mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 	translate(p_L, minXY, maxXY, viewPortXY, ptMiddle.x, ptMiddle.y);
 }
 
-void shearing(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
-	int a; //variable that store the shearing option
-	float shx, shy; //variables that stores the shearing values
+void shearing(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int shOpt, int shx, int shy){
 	node *auxNode; //points to the object that will be translated
 	point pt, ptN, ptMiddle; //auxiliar points
 
@@ -586,18 +567,6 @@ void shearing(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 	ptMiddle = middleObject(p_L);
 	//translates the object to the origin using the given middle point
 	translate(p_L, minXY, maxXY, viewPortXY, -(ptMiddle.x), -(ptMiddle.y));
-
-	printf("Em relacao a qual eixo deseja aplicar o cisalhamento:\n\n");
-	printf("- [0] Eixo X;\n");
-	printf("- [1] Eixo Y;\n");
-	printf("\n-> ");
-	scanf("%d", &a);
-
-	printf("\nQuantidade a ser cisalhada: ");
-	if(a == 0)
-		scanf("%f", &shx);
-	if(a == 1)
-		scanf("%f", &shy);
 
 	//shearing matrix declaration
 	float shearMatrixX[9] = {1, shx, 0, 0, 1, 0, 0, 0, 1};
@@ -612,9 +581,9 @@ void shearing(list *p_L, point *minXY, point *maxXY, point *viewPortXY){
 		p[1] = auxNode->ptList.y;
 		p[2] = 1;
 
-		if(a == 0)
+		if(shOpt == 0)
 			multMatrixArray(shearMatrixX, p, result);
-		if(a == 1)
+		if(shOpt == 1)
 			multMatrixArray(shearMatrixY, p, result);
 
 		//updating the point values
