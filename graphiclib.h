@@ -1,4 +1,5 @@
-/*Daniel Ramos Miola 438340
+/*GRUPO 6
+  Daniel Ramos Miola 438340
   Giulianno Raphael Sbrugnera 408093
   Igor Felipe Ferreira Ceridório 408611
   Rafael Paschoal Giordano 408298*/
@@ -94,10 +95,10 @@ void multMatrixArray(float *matrix, float *vector, float *result);
 point middleObject(list *p_L);
 
 void translate(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int dx, int dy);
-void scale(list *p_L, point *minXY, point *maxXY, point *viewPortXY);
-void rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY);
-void mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY);
-void shearing(list *p_L, point *minXY, point *maxXY, point *viewPortXY);
+void scale(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int sx, int sy);
+void rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int a);
+void mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int mOpt);
+void shearing(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int shOpt, int shx, int shy);
 
 void drawWindow(point *viewPortXY);
 void drawWindowLine(point *viewPortXY, int *input, lookup *lkt);

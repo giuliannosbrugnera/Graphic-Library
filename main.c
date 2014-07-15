@@ -1,4 +1,5 @@
-/*Daniel Ramos Miola 438340
+/*GRUPO 6
+  Daniel Ramos Miola 438340
   Giulianno Raphael Sbrugnera 408093
   Igor Felipe Ferreira Ceridório 408611
   Rafael Paschoal Giordano 408298*/
@@ -23,7 +24,12 @@ int main(){
 	int option; //user decides if wants to work with 2D or 3D dimension
 	int listNum; //user decides which object he/she wants to apply transformations
 	int menu; //stores the menu input by the user
-	int dx, dy; //variables that stores the translations (used in option 0 of 2D menu)
+	int dx, dy; //variables that store the translations (used in option 0 of 2D menu)
+	int sx, sy; //variables that store the scale (used in option 2 of 2D menu)
+	int a; //variable that stores the angle to be rotated (used in option 1 of 2D menu)
+	int mOpt; //variable that stores the mirror option (used in option 4 of 2D menu)
+	int shOpt; //variable used in option of sharing input (used in option 3 of 2D menu)
+	float shx, shy; //variables used in shearing input (used in option 3 of 2D menu)
 
 	/*-----------------------------------------
 		Look-up table definition
@@ -138,25 +144,51 @@ int main(){
 				case 1: // rotate
 					printf("\nQual objeto deseja rotacionar: ");
 					scanf("%d", &listNum);
-					rotate(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
+					printf("Em quantos graus deseja rotacionar a imagem: ");
+					scanf("%d", &a);
+
+					rotate(&l[listNum-1], &minXY, &maxXY, &viewPortXY, a);
 					break;
 
 				case 2: // scaling
 					printf("\nQual objeto deseja escalonar: ");
 					scanf("%d", &listNum);
-					scale(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
+					printf("Quantidade a ser escalonada em relacao ao eixo X do universo: ");
+					scanf("%d", &sx);
+					printf("Quantidade a ser escalonada em relacao ao eixo Y do universo: ");
+					scanf("%d", &sy);
+
+					scale(&l[listNum-1], &minXY, &maxXY, &viewPortXY, sx, sy);
 					break;
 
 				case 3: // shearing
 					printf("\nQual objeto deseja cisalhar: ");
 					scanf("%d", &listNum);
-					shearing(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
+					printf("Em relacao a qual eixo deseja aplicar o cisalhamento:\n\n");
+					printf("- [0] Eixo X;\n");
+					printf("- [1] Eixo Y;\n");
+					printf("\n-> ");
+					scanf("%d", &shOpt);
+					printf("\nQuantidade a ser cisalhada: ");
+					if(shOpt == 0)
+						scanf("%f", &shx);
+					if(shOpt == 1)
+						scanf("%f", &shy);
+
+					shearing(&l[listNum-1], &minXY, &maxXY, &viewPortXY, shOpt, shx, shy);
 					break;
 
 				case 4: // mirror
 					printf("\nQual objeto deseja espelhar: ");
 					scanf("%d", &listNum);
-					mirror(&l[listNum-1], &minXY, &maxXY, &viewPortXY);
+					printf("Em relacao a qual eixo deseja espelhar a imagem:\n\n");
+					printf("- [0] Eixo X;\n");
+					printf("- [1] Eixo Y;\n");
+					printf("- [2] Ambos;\n");
+					printf("\n-> ");
+					scanf("%d", &mOpt);
+
+					mirror(&l[listNum-1], &minXY, &maxXY, &viewPortXY, mOpt);
 					break;
 
 				case 5: // exibir a imagem
