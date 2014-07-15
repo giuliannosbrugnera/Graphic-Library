@@ -1,8 +1,21 @@
-/*GRUPO 6
-  Daniel Ramos Miola 438340
-  Giulianno Raphael Sbrugnera 408093
-  Igor Felipe Ferreira Ceridório 408611
-  Rafael Paschoal Giordano 408298*/
+/*=========================================================================
+UNIVERSIDADE FEDERAL DE SÃO CARLOS - UFSCar - Sorocaba
+CIÊNCIA DA COMPUTAÇÃO - COMPUTAÇÃO GRÁFICA
+PROFESSOR MURILLO RODRIGO PETRUCELLI HOMEM
+
+GRUPO 6
+
+Daniel Ramos Miola 				438340
+Giulianno Raphael Sbrugnera 	408093
+Igor Felipe Ferreira Ceridório 	408611
+Rafael Paschoal Giordano 		408298
+
+ARQUIVO: 		graphiclib.h
+
+DESCRIÇÃO:		arquivo que contém a impelementação das funções da 
+				biblioteca gráfica desenvolvida pelo grupo
+
+==========================================================================*/
 
 #include "graphiclib.h"
 
