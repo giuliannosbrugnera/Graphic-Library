@@ -83,6 +83,8 @@ typedef struct Node3D{
 	struct Node3D *next;
 }node3D;
 
+typedef node3D *list3D;
+
 typedef node3D *face3D;
 
 typedef face3D *object3D;
@@ -129,6 +131,7 @@ int   emptyList(list *p_l);
 
 point3D sruToSrn3D(point3D pt, point3D *maxXYZ, point3D *minXYZ);
 pointD srnToSrd3D(point3D pt3DN, point *viewPortXY);
+point3D middleObject3D(list3D *p_L);
 void setUniverse3D(point3D *minXYZ, point3D *maxXYZ, point3D minUniverse, point3D maxUniverse);
 void crossProduct(point3D a, point3D b, point3D *c);
 int startList3D(face3D *face);
@@ -138,5 +141,7 @@ void conversao(face3D *face, point3D *maxXYZ, point3D *minXYZ, point *viewPortXY
 void mudancaDeBase(face3D *face, point3D u, point3D v, point3D w); 
 void projecaoPerspectiva(face3D *face, point3D p_proj, point3D c_proj);
 void printListBresenham3D(face3D *face, int *input, point *viewPortXY, int color);
+void multMatrixArray3D(float *matrix, float *vector, float *result);
+void multFourByFourMatrix(float first[][4], float second[][4], float result[][4]);
 
 #endif /* __graphiclib_h__ */
