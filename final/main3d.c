@@ -85,16 +85,19 @@ int main(){
 	-----------------------------------------*/
 
 	// Definindo o Sistema de Coordenadas de Visualizacao 
-    point3D u, v, w; //Bases u, v e w
+    point3D u, v, w, vu; //Bases u, v e w
  
-    v.x = 0.0;	
-    v.y = 1.0;	
-    v.z = 0.0; 
+    vu.x = 0.0;	
+    vu.y = 0.0;	
+    vu.z = 1.0; 
+
     w.x = 0.0;	
-    w.y = 0.0;	
+    w.y = -1.0;	
     w.z = -1.0; 
     
-    crossProduct(v, w, &u); // produto vetorial
+    //funcoes ja normalizam os vetores
+    crossProduct(vu, w, &u); // produto vetorial
+    crossProduct(u, w, &v); // produto vetorial
 
     // Definição dos pontos da projecao
     point3D c_proj; //centro de projecao
@@ -102,11 +105,11 @@ int main(){
     
     c_proj.x = 0.0;	
     c_proj.y = 0.0;	
-    c_proj.z = -45.0;
+    c_proj.z = 40.0;
 
     p_proj.x = 0.0;	
     p_proj.y = 0.0;	
-    p_proj.z = 40.0; 
+    p_proj.z = -20.0; 
     
 
 	/*-----------------------------------------
@@ -165,6 +168,8 @@ int main(){
 	pt3D.x = -10;	pt3D.y = -10;	pt3D.z = 0;		addEndList3D(&objeto3d[4], &pt3D, &maxXYZ, &minXYZ);
 	pt3D.x = -10;	pt3D.y = 10;	pt3D.z = 0;		addEndList3D(&objeto3d[4], &pt3D, &maxXYZ, &minXYZ);
 	pt3D.x = 10;	pt3D.y = 10;	pt3D.z = 0;		addEndList3D(&objeto3d[4], &pt3D, &maxXYZ, &minXYZ);
+
+	translate3D(objeto3d, 5, &minXYZ, &maxXYZ, &viewPortXY, 1, 1, 1);
 
 	/* Realizando mudanca de base */
 	mudancaDeBase(&objeto3d[0], u, v, w);

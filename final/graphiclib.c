@@ -730,6 +730,10 @@ void crossProduct(point3D a, point3D b, point3D *c) {
 	c->y = (a.z * b.x) - (a.x * b.z);
 	c->z = (a.x * b.y) - (a.y * b.x);
 
+	int u = sqrt((c->x*c->x)+(c->y*c->y)+(c->z*c->z));
+	c->x = c->x/u;
+	c->y = c->y/u;
+	c->z = c->z/u;
 }
 
 /*Função 27
@@ -918,7 +922,7 @@ void multMatrixArray3D(float *matrix, float *vector, float *result) {
 
 }
 
-/* Function number 13
+/* Function number 36
    Multiplica duas matrizes 4x4*/
 void multFourByFourMatrix(float first[][4], float second[][4], float result[][4]) {
 	
@@ -935,4 +939,43 @@ void multFourByFourMatrix(float first[][4], float second[][4], float result[][4]
 		}
 	}
 
+}
+
+/*Função 37
+  Translação (deslocamento) de um objeto*/
+void translate3D(face3D *object, int n, point3D *minXYZ, point3D *maxXYZ, point *viewPortXY, int dx, int dy, int dz){
+	node3D *auxNode; //points to the object that will be translated
+	point3D pt; //auxiliar points
+
+	//translation matrix declaration
+	float transMatrix[16] = {1, 0, 0, dx, 0, 1, 0, dy, 0, 0, 1, dz,0, 0, 0, 1};
+	//point vector and result array declaration
+	float p[4], result[4];
+
+	int i;
+	for (i = 0; i < n; i++){
+		auxNode = object[i];
+		
+		while(auxNode != NULL){
+
+			p[0] = auxNode->ptList3D.x;
+			p[1] = auxNode->ptList3D.y;
+			p[3] = auxNode->ptList3D.z;
+			p[2] = 1;
+
+			multMatrixArray3D(transMatrix, p, result);
+
+			//updating the point values
+			auxNode->ptList3D.x = pt.x = result[0];
+			auxNode->ptList3D.y = pt.y = result[1];
+			auxNode->ptList3D.z = pt.z = result[2];
+
+			//converts the translated point to srn
+			auxNode->ptList3DN = sruToSrn3D(auxNode->ptList3D, maxXYZ, minXYZ);
+			//converts the translated point to srd
+			auxNode->ptListD = srnToSrd3D(auxNode->ptList3DN, viewPortXY);
+
+			auxNode = auxNode->next;
+		}
+	}
 }
