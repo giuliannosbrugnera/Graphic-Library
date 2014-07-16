@@ -842,12 +842,20 @@ void printListBresenham3D(face3D *face, int *input, point *viewPortXY, int color
 	node3D *aux;
 	aux = *face;
 	pointD ptOneD, ptTwoD;
+	point ptOneDAux, ptTwoDAux;
 
 	while(aux != NULL){
 		ptOneD = aux->ptListD;
+		
+		ptOneDAux.x = (int)ptOneD.x;
+		ptOneDAux.y = (int)ptOneD.y;
+
 		if(aux->next != NULL){
 			ptTwoD = aux->next->ptListD;
-			bresenham(input, &ptOneD, &ptTwoD, viewPortXY, color);
+
+			ptTwoDAux.x = (int)ptTwoD.x;
+			ptTwoDAux.y = (int)ptTwoD.y;
+			bresenham(input, &ptOneDAux, &ptTwoDAux, viewPortXY, color);
 		}
 		aux = aux->next;
 	}
