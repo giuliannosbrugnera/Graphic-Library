@@ -379,7 +379,7 @@ point middleObject(list *p_L){
 		ptMin.x = auxNode->ptList.x;
 		ptMin.y = auxNode->ptList.y;
 		ptMax.x = auxNode->ptList.x;
-		ptMin.y = auxNode->ptList.y;
+		ptMax.y = auxNode->ptList.y;
 	}
 
 	while(auxNode != NULL){
@@ -836,8 +836,7 @@ void projecaoPerspectiva(face3D *face, point3D p_proj, point3D c_proj){
 } 
 
 /*Funcao 33
-    Esta funcao realiza o tracado ponto 
-    a ponto da face do objeto 3d desejado */
+    Esta funcao realiza o tracado ponto a ponto da face do objeto 3d desejado */
 void printListBresenham3D(face3D *face, int *input, point *viewPortXY, int color){
 	node3D *aux;
 	aux = *face;
@@ -859,4 +858,81 @@ void printListBresenham3D(face3D *face, int *input, point *viewPortXY, int color
 		}
 		aux = aux->next;
 	}
+}
+
+/*Função 34
+  Calcula o ponto médio de um objeto 3D*/
+point3D middleObject3D(list3D *p_L){
+	point3D ptMiddle, ptMax, ptMin;
+	node3D *auxNode;
+	auxNode = *p_L;
+
+	if(auxNode != NULL){
+		ptMin.x = auxNode->ptList3D.x;
+		ptMin.y = auxNode->ptList3D.y;
+		ptMin.z = auxNode->ptList3D.z;
+		ptMax.x = auxNode->ptList3D.x;
+		ptMax.y = auxNode->ptList3D.y;
+		ptMax.z = auxNode->ptList3D.z;
+	}
+
+	while(auxNode != NULL){
+		
+		//obtaining the minimum points
+		if(auxNode->ptList3D.x < ptMin.x)
+			ptMin.x = auxNode->ptList3D.x;
+		if(auxNode->ptList3D.y < ptMin.y)
+			ptMin.y = auxNode->ptList3D.y;
+		if(auxNode->ptList3D.z < ptMin.z)
+			ptMin.z = auxNode->ptList3D.z;
+
+		//obtaining the maximum points
+		if(auxNode->ptList3D.x > ptMax.x)
+			ptMax.x = auxNode->ptList3D.x;
+		if(auxNode->ptList3D.y > ptMax.y)
+			ptMax.y = auxNode->ptList3D.y;
+		if(auxNode->ptList3D.z > ptMax.z)
+			ptMax.z = auxNode->ptList3D.z;
+
+		//iterates the points list
+		auxNode = auxNode->next;
+	}
+
+	//calculates the middle point
+	ptMiddle.x = ((ptMax.x - ptMin.x)/2) + ptMin.x;
+	ptMiddle.y = ((ptMax.y - ptMin.y)/2) + ptMin.y;
+	ptMiddle.z = ((ptMax.z - ptMin.z)/2) + ptMin.z;
+
+	return ptMiddle;
+}
+
+/* Função 35
+   Multiplica uma matriz 4x4 por um vetor de 4 posições*/
+void multMatrixArray3D(float *matrix, float *vector, float *result) {
+	
+	//multiplicating the matrix by the vector
+	result[0] = (matrix[0]  * vector[0]) + (matrix[1]  * vector[1]) + (matrix[2]   * vector[2]) + (matrix[3]  * vector[3]);
+	result[1] = (matrix[4]  * vector[0]) + (matrix[5]  * vector[1]) + (matrix[6]   * vector[2]) + (matrix[7]  * vector[3]);
+	result[2] = (matrix[8]  * vector[0]) + (matrix[9]  * vector[1]) + (matrix[10]  * vector[2]) + (matrix[11] * vector[3]);
+	result[3] = (matrix[12] * vector[0]) + (matrix[13] * vector[1]) + (matrix[14]  * vector[2]) + (matrix[15] * vector[3]);
+
+}
+
+/* Function number 13
+   Multiplica duas matrizes 4x4*/
+void multFourByFourMatrix(float first[][4], float second[][4], float result[][4]) {
+	
+	int i, j, k;
+	float sum;
+
+	for (i = 0; i <= 3; i++) {
+		for (j = 0; j <= 3; j++) {
+			sum = 0;
+			for (k = 0; k <= 3; k++) {
+				sum = sum + first[i][k] * second[k][j];
+			}
+			result[i][j]=sum;
+		}
+	}
+
 }
