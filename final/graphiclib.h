@@ -142,6 +142,8 @@ void 	mudancaDeBase(face3D *face, point3D u, point3D v, point3D w);
 void 	projecaoPerspectiva(face3D *face, point3D p_proj, point3D c_proj);
 void 	printListBresenham3D(face3D *face, int *input, point *viewPortXY, int color);
 void 	translate3D(face3D *object, int n, point3D *minXYZ, point3D *maxXYZ, point *viewPortXY, int dx, int dy, int dz);
+void 	scale3D(face3D *object, int n, point3D *minXYZ, point3D *maxXYZ, point *viewPortXY, int dx, int dy, int dz);
+void 	rotate3D(face3D *object, int n, point3D *minXYZ, point3D *maxXYZ, point *viewPortXY, int teta);
 void 	multMatrixArray3D(float *matrix, float *vector, float *result);
 void 	multFourByFourMatrix(float first[][4], float second[][4], float result[][4]);
 

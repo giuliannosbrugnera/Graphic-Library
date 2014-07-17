@@ -960,8 +960,87 @@ void translate3D(face3D *object, int n, point3D *minXYZ, point3D *maxXYZ, point 
 
 			p[0] = auxNode->ptList3D.x;
 			p[1] = auxNode->ptList3D.y;
-			p[3] = auxNode->ptList3D.z;
-			p[2] = 1;
+			p[2] = auxNode->ptList3D.z;
+			p[3] = 1;
+
+			multMatrixArray3D(transMatrix, p, result);
+
+			//updating the point values
+			auxNode->ptList3D.x = pt.x = result[0];
+			auxNode->ptList3D.y = pt.y = result[1];
+			auxNode->ptList3D.z = pt.z = result[2];
+
+			//converts the translated point to srn
+			auxNode->ptList3DN = sruToSrn3D(auxNode->ptList3D, maxXYZ, minXYZ);
+			//converts the translated point to srd
+			auxNode->ptListD = srnToSrd3D(auxNode->ptList3DN, viewPortXY);
+
+			auxNode = auxNode->next;
+		}
+	}
+}
+
+/*Função 38
+  operaçao de mudanca de escala de um objeto 3d*/
+void scale3D(face3D *object, int n, point3D *minXYZ, point3D *maxXYZ, point *viewPortXY, int sx, int sy, int sz){
+	node3D *auxNode; //points to the object that will be translated
+	point3D pt; //auxiliar points
+
+	//translation matrix declaration
+	float transMatrix[16] = {sx, 0, 0, 0, 0, sy, 0, 0, 0, 0, sz, 0, 0, 0, 0, 1};
+	//point vector and result array declaration
+	float p[4], result[4];
+
+	int i;
+	for (i = 0; i < n; i++){
+		auxNode = object[i];
+		
+		while(auxNode != NULL){
+
+			p[0] = auxNode->ptList3D.x;
+			p[1] = auxNode->ptList3D.y;
+			p[2] = auxNode->ptList3D.z;
+			p[3] = 1;
+
+			multMatrixArray3D(transMatrix, p, result);
+
+			//updating the point values
+			auxNode->ptList3D.x = pt.x = result[0];
+			auxNode->ptList3D.y = pt.y = result[1];
+			auxNode->ptList3D.z = pt.z = result[2];
+
+			//converts the translated point to srn
+			auxNode->ptList3DN = sruToSrn3D(auxNode->ptList3D, maxXYZ, minXYZ);
+			//converts the translated point to srd
+			auxNode->ptListD = srnToSrd3D(auxNode->ptList3DN, viewPortXY);
+
+			auxNode = auxNode->next;
+		}
+	}
+}
+
+/*Função 38
+  operaçao de mudanca de escala de um objeto 3d*/
+void rotate3D(face3D *object, int n, point3D *minXYZ, point3D *maxXYZ, point *viewPortXY, int teta){
+	node3D *auxNode; //points to the object that will be translated
+	point3D pt; //auxiliar points
+			
+	//translation matrix declaration
+	float transMatrix[16];
+
+	//point vector and result array declaration
+	float p[4], result[4];
+
+	int i;
+	for (i = 0; i < n; i++){
+		auxNode = object[i];
+		
+		while(auxNode != NULL){
+
+			p[0] = auxNode->ptList3D.x;
+			p[1] = auxNode->ptList3D.y;
+			p[2] = auxNode->ptList3D.z;
+			p[3] = 1;
 
 			multMatrixArray3D(transMatrix, p, result);
 
