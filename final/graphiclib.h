@@ -122,6 +122,7 @@ void  scale(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int sx, in
 void  rotate(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int a);
 void  mirror(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int mOpt);
 void  shearing(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int shOpt, int shx, int shy);
+void  fill(list *p_L, int *input, int color, point p, point *viewPortXY);
 int   startList(list *p_l);
 int   emptyList(list *p_l);
 

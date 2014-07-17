@@ -168,6 +168,50 @@ int main(){
 	printListBresenham(&l[6], image, &viewPortXY, objColor[6]);
 	printListBresenham(&l[7], image, &viewPortXY, objColor[7]);
 
+
+	// preenche poligonos atraves do ponto central
+	point midle, ptdm;
+
+	midle = middleObject(&l[0]);//obterm ponto central do objeto
+	midle = sruToSrn(&midle, &maxXY, &minXY);
+	ptdm = srnToSrd(&midle, &viewPortXY);//obtem ponto discreto central do objeto
+	fill(&l[0], image, objColor[0], ptdm, &viewPortXY);//preenchimento recursivo do objeto
+
+	midle = middleObject(&l[1]);
+	midle = sruToSrn(&midle, &maxXY, &minXY);
+	ptdm = srnToSrd(&midle, &viewPortXY);
+	fill(&l[1], image, objColor[1], ptdm, &viewPortXY);
+
+	midle = middleObject(&l[2]);
+	midle = sruToSrn(&midle, &maxXY, &minXY);
+	ptdm = srnToSrd(&midle, &viewPortXY);
+	fill(&l[2], image, objColor[2], ptdm, &viewPortXY);
+
+	midle = middleObject(&l[3]);
+	midle = sruToSrn(&midle, &maxXY, &minXY);
+	ptdm = srnToSrd(&midle, &viewPortXY);
+	fill(&l[3], image, objColor[3], ptdm, &viewPortXY);
+
+	midle = middleObject(&l[4]);
+	midle = sruToSrn(&midle, &maxXY, &minXY);
+	ptdm = srnToSrd(&midle, &viewPortXY);
+	fill(&l[4], image, objColor[4], ptdm, &viewPortXY);
+
+	midle = middleObject(&l[5]);
+	midle = sruToSrn(&midle, &maxXY, &minXY);
+	ptdm = srnToSrd(&midle, &viewPortXY);
+	fill(&l[5], image, objColor[5], ptdm, &viewPortXY);
+
+	midle = middleObject(&l[6]);
+	midle = sruToSrn(&midle, &maxXY, &minXY);
+	ptdm = srnToSrd(&midle, &viewPortXY);
+	fill(&l[6], image, objColor[6], ptdm, &viewPortXY);
+
+	midle = middleObject(&l[7]);
+	midle = sruToSrn(&midle, &maxXY, &minXY);
+	ptdm = srnToSrd(&midle, &viewPortXY);
+	fill(&l[7], image, objColor[7], ptdm, &viewPortXY);
+
 	//exibição da imagem final
 	drawWindowLine(&viewPortXY, image, lkt);
 
