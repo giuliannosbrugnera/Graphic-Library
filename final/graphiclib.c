@@ -675,7 +675,8 @@ void shearing(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int shOp
 }
 
 /*Função 21
-  Realiza o preenchimento de um poligono 2d*/
+  Realiza o preenchimento de um poligono 2d recursivamente atraves
+  de um ponto central passado inicialmente como parametro*/
 void fill(list *p_L, int *input, int color, point p, point *viewPortXY){
 	
 	if(input[(int)p.y*(int)viewPortXY->x+(int)p.x] == 0){
