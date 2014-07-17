@@ -169,7 +169,9 @@ int main(){
 	pt3D.x = -10;	pt3D.y = 10;	pt3D.z = 0;		addEndList3D(&objeto3d[4], &pt3D, &maxXYZ, &minXYZ);
 	pt3D.x = 10;	pt3D.y = 10;	pt3D.z = 0;		addEndList3D(&objeto3d[4], &pt3D, &maxXYZ, &minXYZ);
 
-	translate3D(objeto3d, 5, &minXYZ, &maxXYZ, &viewPortXY, 1, 1, 1);
+	translate3D(objeto3d, 5, &minXYZ, &maxXYZ, &viewPortXY, 5, 2, 1);
+	scale3D(objeto3d, 5, &minXYZ, &maxXYZ, &viewPortXY, 2, 2, 2);
+	//rotate3D(objeto3d, 5, &minXYZ, &maxXYZ, &viewPortXY, 1);
 
 	/* Realizando mudanca de base */
 	mudancaDeBase(&objeto3d[0], u, v, w);
