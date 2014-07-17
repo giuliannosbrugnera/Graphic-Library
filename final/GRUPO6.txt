@@ -1,0 +1,13 @@
+UNIVERSIDADE FEDERAL DE SÃO CARLOS - UFSCar - Sorocaba
+CIÊNCIA DA COMPUTAÇÃO - COMPUTAÇÃO GRÁFICA
+PROFESSOR MURILLO RODRIGO PETRUCELLI HOMEM
+
+Trabalho de implementação: Desenvolvimento de uma biblioteca gráfica simples para visualização
+de objetos 2D e 3D, bem como funções de transformações para estes objetos.
+
+GRUPO 6
+
+438340 - Daniel Ramos Miola		
+408093 - Giulianno Raphael Sbrugnera
+408611 - Igor Felipe Ferreira Ceridório
+408298 - Rafael Paschoal Giordano
