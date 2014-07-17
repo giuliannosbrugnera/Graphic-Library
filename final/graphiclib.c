@@ -675,12 +675,42 @@ void shearing(list *p_L, point *minXY, point *maxXY, point *viewPortXY, int shOp
 }
 
 /*Função 21
+  Realiza o preenchimento de um poligono 2d recursivamente atraves
+  de um ponto central passado inicialmente como parametro*/
+void fill(list *p_L, int *input, int color, point p, point *viewPortXY){
+	
+	if(input[(int)p.y*(int)viewPortXY->x+(int)p.x] == 0){
+		input[(int)p.y*(int)viewPortXY->x+(int)p.x] = color;
+	}
+
+	if(input[(int)p.y*(int)viewPortXY->x+(int)p.x+1] == 0){
+		p.x++;
+		fill(p_L, input, color, p, viewPortXY);
+	}
+
+	if(input[((int)p.y+1)*(int)viewPortXY->x+(int)p.x] == 0){
+		p.y++;
+		fill(p_L, input, color, p, viewPortXY);
+	}
+
+	if(input[(int)p.y*(int)viewPortXY->x+(int)p.x-1] == 0){
+		p.x--;
+		fill(p_L, input, color, p, viewPortXY);
+	}
+
+	if(input[((int)p.y-1)*(int)viewPortXY->x+(int)p.x] == 0){
+		p.y--;
+		fill(p_L, input, color, p, viewPortXY);
+	}
+}
+
+/*Função 22
   Inicializa uma lista que conterá os pontos de um objeto*/
 int startList(list *p_l){
 	*p_l = NULL;
 }
 
-/*Função 22
+/*Função 23
   Verifica se uma lista está vazia ou não*/
 int emptyList(list *p_l){
 	if(*p_l == NULL) return 1;
@@ -691,7 +721,7 @@ int emptyList(list *p_l){
   Bloco de funções 3D
 ------------------------------------------------------------------------------*/
 
-/*Função 23
+/*Função 24
   Converte um ponto do SRU para o SRN*/
 point3D sruToSrn3D(point3D pt, point3D *maxXYZ, point3D *minXYZ){
 	point3D ptN;	
@@ -700,7 +730,7 @@ point3D sruToSrn3D(point3D pt, point3D *maxXYZ, point3D *minXYZ){
 	return ptN;
 }
 
-/*Função 24
+/*Função 25
   Converte um ponto do SRN para o SRD*/
 pointD srnToSrd3D(point3D pt3DN, point *viewPortXY){
 	pointD ptD;
@@ -709,7 +739,7 @@ pointD srnToSrd3D(point3D pt3DN, point *viewPortXY){
 	return ptD;
 }
 
-/*Função 25
+/*Função 26
   Definição das dimensões mínimas e máximas do universo*/
 void setUniverse3D(point3D *minXYZ, point3D *maxXYZ, point3D minUniverse, point3D maxUniverse){
 	minXYZ->x = minUniverse.x;
@@ -720,7 +750,7 @@ void setUniverse3D(point3D *minXYZ, point3D *maxXYZ, point3D minUniverse, point3
 	//maxXYZ->y = maxUniverse.z;
 }
 
-// Function 26
+// Function 27
 // Given two vectors performs the cross product
 // In Computer Graphic, a vector is equals a point
 // NOTE: this function gives a correct answer only when a and b start at the origin point (0,0,0)
@@ -736,20 +766,20 @@ void crossProduct(point3D a, point3D b, point3D *c) {
 	c->z = c->z/u;
 }
 
-/*Função 27
+/*Função 28
   Inicializa uma lista que conterá os pontos de um objeto*/
 int startList3D(face3D *p_l3D){
 	*p_l3D = NULL;
 }
 
-/*Função 28
+/*Função 29
   Verifica se uma lista está vazia ou não*/
 int emptyList3D(face3D *p_l3D){
 	if(*p_l3D == NULL) return 1;
 	return 0;
 }
 
-/*Função 29
+/*Função 30
   Adiciona um novo ponto a um determinado objeto*/
 void addEndList3D(face3D *face, point3D *pt3D, point3D *maxXYZ, point3D *minXYZ){
 	node3D *newNode3D, *auxNode3D;
@@ -773,7 +803,7 @@ void addEndList3D(face3D *face, point3D *pt3D, point3D *maxXYZ, point3D *minXYZ)
 	}
 }
 
-/*Função 30
+/*Função 31
   Converte uma face para SRN e SRD*/
 void conversao(face3D *face, point3D *maxXYZ, point3D *minXYZ, point *viewPortXY){
 	node3D *aux;
@@ -788,7 +818,7 @@ void conversao(face3D *face, point3D *maxXYZ, point3D *minXYZ, point *viewPortXY
 	}
 }
 
-/*Funcao 31
+/*Funcao 32
     Esta funcao faz uma multiplicacao com a matriz de mudanca de base,
     utilizada para a conversao do ponto no R3 para um ponto no R2 */
 void mudancaDeBase(face3D *face, point3D u, point3D v, point3D w){ 
@@ -824,7 +854,7 @@ void mudancaDeBase(face3D *face, point3D u, point3D v, point3D w){
     }     
 }
 
-/*Funcao 32
+/*Funcao 33
     Esta funcao faz a projecao do vetor no R3 para um vetor no R2 */
 void projecaoPerspectiva(face3D *face, point3D p_proj, point3D c_proj){ 
     node3D *aux;
@@ -839,7 +869,7 @@ void projecaoPerspectiva(face3D *face, point3D p_proj, point3D c_proj){
     }  
 } 
 
-/*Funcao 33
+/*Funcao 34
     Esta funcao realiza o tracado ponto a ponto da face do objeto 3d desejado */
 void printListBresenham3D(face3D *face, int *input, point *viewPortXY, int color){
 	node3D *aux;
@@ -864,7 +894,7 @@ void printListBresenham3D(face3D *face, int *input, point *viewPortXY, int color
 	}
 }
 
-/*Função 34
+/*Função 35
   Calcula o ponto médio de um objeto 3D*/
 point3D middleObject3D(list3D *p_L){
 	point3D ptMiddle, ptMax, ptMin;
@@ -910,7 +940,7 @@ point3D middleObject3D(list3D *p_L){
 	return ptMiddle;
 }
 
-/* Função 35
+/* Função 36
    Multiplica uma matriz 4x4 por um vetor de 4 posições*/
 void multMatrixArray3D(float *matrix, float *vector, float *result) {
 	
@@ -922,7 +952,7 @@ void multMatrixArray3D(float *matrix, float *vector, float *result) {
 
 }
 
-/* Function number 36
+/* Function number 37
    Multiplica duas matrizes 4x4*/
 void multFourByFourMatrix(float first[][4], float second[][4], float result[][4]) {
 	
@@ -941,7 +971,7 @@ void multFourByFourMatrix(float first[][4], float second[][4], float result[][4]
 
 }
 
-/*Função 37
+/*Função 38
   Translação (deslocamento) de um objeto*/
 void translate3D(face3D *object, int n, point3D *minXYZ, point3D *maxXYZ, point *viewPortXY, int dx, int dy, int dz){
 	node3D *auxNode; //points to the object that will be translated
@@ -980,7 +1010,7 @@ void translate3D(face3D *object, int n, point3D *minXYZ, point3D *maxXYZ, point 
 	}
 }
 
-/*Função 38
+/*Função 39
   operaçao de mudanca de escala de um objeto 3d*/
 void scale3D(face3D *object, int n, point3D *minXYZ, point3D *maxXYZ, point *viewPortXY, int sx, int sy, int sz){
 	node3D *auxNode; //points to the object that will be translated
@@ -1019,7 +1049,7 @@ void scale3D(face3D *object, int n, point3D *minXYZ, point3D *maxXYZ, point *vie
 	}
 }
 
-/*Função 38
+/*Função 40
   operaçao de mudanca de escala de um objeto 3d*/
 void rotate3D(face3D *object, int n, point3D *minXYZ, point3D *maxXYZ, point *viewPortXY, int teta){
 	node3D *auxNode; //points to the object that will be translated
